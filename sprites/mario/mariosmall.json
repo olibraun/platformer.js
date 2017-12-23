@@ -1,6 +1,0 @@
-{
-    "url": "sprites/mario/mariosmall.png",
-    "width": 16,
-    "height": 16,
-    "sprites": ["left-1","left-2","right-1","right-2","jump-left","jump-right"]
-}

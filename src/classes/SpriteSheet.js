@@ -1,6 +1,6 @@
 class SpriteSheet{
   constructor(image,width,height){
-    this.image = mariosmall;
+    this.image = image;
     this.width = width;
     this.height = height;
     this.tiles = new Map();
