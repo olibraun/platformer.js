@@ -1,7 +1,7 @@
 //Platformer Mario
 
 //Globaler Vergrößerungsfaktor für die Grafiken
-let global_graphics_scale = 3;
+let global_graphics_scale = 2;
 
 function preload(){
   //Load Images
@@ -25,10 +25,8 @@ function setup() {
 }
 
 function draw() {
-  tiles.drawByIndex("ground",0,0);
-  tiles.drawByIndex("sky",1,1);
-  tiles.drawByIndex("chocolate",2,2);
-  tiles.drawByIndex("bricks",3,3);
+  tiles.drawByIndexRange("sky",0,16,0,15);
+  tiles.drawByIndexRange("ground",0,16,13,2);
 }
 
 //Globale Variablen
