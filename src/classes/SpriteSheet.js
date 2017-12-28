@@ -8,7 +8,6 @@ class SpriteSheet{
 
   define(name,row_index,col_index){
     const buffer = document.createElement('canvas');
-    console.log(buffer);
     buffer.height = this.height;
     buffer.width = this.width;
     buffer
@@ -29,7 +28,6 @@ class SpriteSheet{
 
   draw(name, context, x, y) {
     const buffer = this.tiles.get(name);
-    console.log(buffer);
     context.drawImage(buffer, x, y);
   }
 
