@@ -15,4 +15,19 @@ loadLevel("1-1")
       tiles.drawByIndexRange(background.name,context, x,xr,y,yr);
     });
   });
+
+  const pos = {
+    x: 64,
+    y: 64
+  }
+
+  //draw mario at pos
+
+  function update() {
+    pos.x += 2;
+    pos.y += 2;
+    requestAnimationFrame(update);
+  }
+
+  update();
 });
