@@ -1,17 +1,19 @@
-function getImage(url){
-  //loadImage with promise
+function loadImage(url) {
   return new Promise(resolve => {
-      const img = loadImage(url, () => {
-        resolve(img);
+      const image = new Image();
+      image.addEventListener('load', () => {
+          resolve(image);
       });
+      image.src = url;
   });
 }
 
-function getJSON(url){
-  //loadJSON with promise
-  return new Promise(resolve => {
-    const json = loadJSON(url, () => {
-      resolve(json);
-    });
-  });
+function loadJSON(url){
+  return fetch(url)
+  .then(r => r.json());
 }
+
+// function loadLevel(name) {
+//   return fetch(`/levels/${name}.json`)
+//   .then(r => r.json());
+// }

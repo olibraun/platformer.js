@@ -7,30 +7,38 @@ class SpriteSheet{
   }
 
   define(name,row_index,col_index){
-    const buffer = createGraphics(this.width*global_graphics_scale,this.height*global_graphics_scale);
-    buffer.pixelDensity(1);
-    buffer.image(
-      this.image,
-      0,
-      0,
-      this.width*global_graphics_scale,
-      this.height*global_graphics_scale,
-      row_index*this.width,
-      col_index*this.height,
-      this.width,
-      this.height);
+    const buffer = document.createElement('canvas');
+    buffer.height = this.height;
+    buffer.width = this.width;
+    buffer
+      .getContext('2d')
+      .drawImage(
+        this.image,
+        0,
+        0,
+        this.width,
+        this.height,
+        row_index*this.width,
+        col_index*this.height,
+        this.width,
+        this.height
+      );
     this.tiles.set(name,buffer);
   }
 
-  drawByIndex(name,row_index,col_index){
+  draw(name, context, x, y) {
     const buffer = this.tiles.get(name);
-    image(buffer,row_index*this.width*global_graphics_scale,col_index*this.height*global_graphics_scale);
+    context.drawImage(buffer, x, y);
   }
 
-  drawByIndexRange(name,row_index,row_len,col_index,col_len){
+  drawByIndex(name,context,row_index,col_index){
+    this.draw(name,context,row_index*this.width,col_index*this.height);
+  }
+
+  drawByIndexRange(name,context,row_index,row_len,col_index,col_len){
     for(let i = row_index; i < row_index+row_len; i++){
       for(let j = col_index; j < col_index+col_len; j++){
-        this.drawByIndex(name,i,j);
+        this.drawByIndex(name,context,i,j);
       }
     }
   }
