@@ -8,7 +8,6 @@ loadJSON("sprites/overworld.json").then(spec => Promise.all([
   loadImage(spec.imageURL)
 ]))
 .then(([spec,img]) => {
-  console.log("I am here");
   const tiles = new SpriteSheet(img,spec.tileW,spec.tileH);
   spec.tiles.forEach(tile => {
     const index = tile.index;
