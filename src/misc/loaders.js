@@ -13,6 +13,10 @@ function loadJSON(url){
   .then(r => r.json());
 }
 
+function loadLevel(name){
+  return loadJSON(`levels/${name}.json`);
+}
+
 function loadSpriteSheet(name){
   return loadJSON(`sprites/${name}.json`).then(spec => Promise.all([
     spec,

@@ -3,10 +3,15 @@
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-Promise.all([
-  loadJSON("levels/1-1.json"),
-  loadSpriteSheet("overworld")
-])
+function loadLevel(name){
+  return loadJSON(`levels/${name}.json`);
+}
+
+loadLevel("1-1")
+.then((levelSpec) => Promise.all([
+  levelSpec,
+  loadSpriteSheet(levelSpec.spritesheet)
+]))
 .then(([levelSpec,tiles]) => {
   window.levelSpec = levelSpec;
   levelSpec.backgrounds.forEach(background => {
