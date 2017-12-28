@@ -1,0 +1,23 @@
+{
+  "spritesheet": "overworld",
+  "backgrounds": [
+    {
+      "name": "sky",
+      "ranges": [
+        [
+          0,16,
+          0,15
+        ]
+      ]
+    },
+    {
+      "name": "ground",
+      "ranges": [
+        [
+          0,16,
+          13,2
+        ]
+      ]
+    }
+  ]
+}
