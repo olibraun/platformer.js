@@ -26,7 +26,7 @@ function loadSpriteSheet(name){
     const tiles = new SpriteSheet(img,spec.tileW,spec.tileH);
     spec.tiles.forEach(tile => {
       const index = tile.index;
-      tiles.define(tile.name,index[0],index[1]);
+      tiles.defineTile(tile.name,index[0],index[1]);
     });
     return tiles;
   });
