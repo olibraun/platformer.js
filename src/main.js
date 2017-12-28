@@ -3,10 +3,6 @@
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-function loadLevel(name){
-  return loadJSON(`levels/${name}.json`);
-}
-
 loadLevel("1-1")
 .then((levelSpec) => Promise.all([
   levelSpec,
