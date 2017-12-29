@@ -37,12 +37,13 @@ function loadLevel(name){
     const level = new Level();
     createTiles(level,levelSpec.backgrounds);
 
-    const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
+    const backgroundLayer = createBackgroundLayer(level,tiles);
     level.comp.layers.push(backgroundLayer);
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);
 
     console.log(level);
+    console.table(level.tiles.grid);
 
     return level;
   });

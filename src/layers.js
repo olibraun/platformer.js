@@ -1,11 +1,13 @@
-function createBackgroundLayer(backgrounds,tiles){
+function createBackgroundLayer(level,tiles){
   const buffer = document.createElement('canvas');
   buffer.width = canvas.width;
   buffer.height = canvas.height;
 
-  backgrounds.forEach(background => {
-    background.ranges.forEach(([x,xr,y,yr]) => {
-      tiles.drawByIndexRange(background.name,buffer.getContext('2d'), x,xr,y,yr);
+  const context = buffer.getContext('2d');
+
+  level.tiles.grid.forEach((column,x) => {
+    column.forEach((tile,y) => {
+      tiles.drawByIndex(tile.name, context, x, y);
     });
   });
 
