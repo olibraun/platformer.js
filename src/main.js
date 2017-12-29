@@ -1,10 +1,6 @@
 //Platformer Mario
 
-const input = new KeyboardState();
-input.addMapping(32, keyState => {
-  console.log(keyState);
-});
-input.listenTo(window);
+
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -19,6 +15,18 @@ loadLevel("1-1")
   const gravity = 2000;
   mario.pos.set(64,180);
   mario.vel.set(200,-600);
+
+  const SPACE = 32;
+  const input = new KeyboardState();
+  input.addMapping(SPACE, keyState => {
+    if(keyState){
+      mario.jump.start();
+    } else {
+      mario.jump.cancel();
+    }
+    console.log(keyState);
+  });
+  input.listenTo(window);
 
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
