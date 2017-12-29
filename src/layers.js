@@ -14,8 +14,10 @@ function createBackgroundLayer(backgrounds,tiles){
   };
 }
 
-function createSpriteLayer(entity){
+function createSpriteLayer(entities){
   return function spriteLayer(context){
-    entity.draw(context);
+    entities.forEach(entity => {
+      entity.draw(context);
+    });
   }
 }

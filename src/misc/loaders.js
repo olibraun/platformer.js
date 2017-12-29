@@ -14,7 +14,21 @@ function loadJSON(url){
 }
 
 function loadLevel(name){
-  return loadJSON(`levels/${name}.json`);
+  return loadJSON(`levels/${name}.json`)
+  .then(levelSpec => Promise.all([
+    levelSpec,
+    loadSpriteSheet(levelSpec.spritesheet)
+  ]))
+  .then(([levelSpec,tiles]) => {
+    const level = new Level();
+
+    const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
+    level.comp.layers.push(backgroundLayer);
+    const spriteLayer = createSpriteLayer(level.entities);
+    level.comp.layers.push(spriteLayer);
+
+    return level;
+  });
 }
 
 function loadSpriteSheet(name){
