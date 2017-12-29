@@ -16,26 +16,13 @@ loadLevel("1-1")
 .then((levelSpec) => Promise.all([
   levelSpec,
   loadSpriteSheet(levelSpec.spritesheet),
-  loadMarioSpriteSheet()
+  createMario()
 ]))
-.then(([levelSpec,tiles,marioSprites]) => {
+.then(([levelSpec,tiles,mario]) => {
   const gravity = 0.5;
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
-  comp.layers.push(backgroundLayer);  
-
-  const mario = new Entity();
-  mario.pos.set(64,180);
-  mario.vel.set(2,-10);
-
-  mario.draw = function drawMario(context){
-    marioSprites.draw("idle",context,this.pos.x,this.pos.y);
-  }
-
-  mario.update = function updateMario(){
-    this.pos.x += this.vel.x;
-    this.pos.y += this.vel.y;
-  }
+  comp.layers.push(backgroundLayer);
 
   function update() {
     //draw background from buffer
