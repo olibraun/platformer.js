@@ -10,20 +10,24 @@ loadLevel("1-1")
   createMario()
 ]))
 .then(([levelSpec,tiles,mario]) => {
-  const gravity = 0.5;
+  const gravity = 30;
+
+  mario.pos.set(64,180);
+  mario.vel.set(200,-600);
+
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
   comp.layers.push(backgroundLayer);
 
-  function update() {
-    //draw background from buffer
+  const timer = new Timer(1/60);
+
+  timer.update = function update(deltaTime) {
     comp.draw(context);
     mario.draw(context);
 
-    mario.update();
+    mario.update(deltaTime);
     mario.vel.y += gravity;
-    requestAnimationFrame(update);
   }
 
-  update();
+  timer.start(0);
 });
