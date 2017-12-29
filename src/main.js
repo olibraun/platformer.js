@@ -1,5 +1,11 @@
 //Platformer Mario
 
+const input = new KeyboardState();
+input.addMapping(32, keyState => {
+  console.log(keyState);
+});
+input.listenTo(window);
+
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
