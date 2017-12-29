@@ -12,6 +12,34 @@ function loadMarioSpriteSheet(){
   });
 }
 
+class Compositor{
+  constructor(){
+    this.layers = [];
+  }
+
+  draw(context){
+    this.layers.forEach(layer => {
+      layer(context);
+    });
+  }
+}
+
+function createBackgroundLayer(backgrounds,tiles){
+  const buffer = document.createElement('canvas');
+  buffer.width = canvas.width;
+  buffer.height = canvas.height;
+
+  backgrounds.forEach(background => {
+    background.ranges.forEach(([x,xr,y,yr]) => {
+      tiles.drawByIndexRange(background.name,buffer.getContext('2d'), x,xr,y,yr);
+    });
+  });
+
+  return function drawBackgroundLayer(context){
+    context.drawImage(buffer,0,0);
+  };
+}
+
 loadLevel("1-1")
 .then((levelSpec) => Promise.all([
   levelSpec,
@@ -19,12 +47,9 @@ loadLevel("1-1")
   loadMarioSpriteSheet()
 ]))
 .then(([levelSpec,tiles,marioSprites]) => {
-  window.levelSpec = levelSpec;
-  levelSpec.backgrounds.forEach(background => {
-    background.ranges.forEach(([x,xr,y,yr]) => {
-      tiles.drawByIndexRange(background.name,context, x,xr,y,yr);
-    });
-  });
+  const comp = new Compositor();
+  const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
+  comp.layers.push(backgroundLayer);  
 
   const pos = {
     x: 64,
@@ -32,6 +57,9 @@ loadLevel("1-1")
   };
 
   function update() {
+    //draw background from buffer
+    comp.draw(context);
+   
     //draw mario at pos
     marioSprites.draw("idle",context,pos.x,pos.y);
 
