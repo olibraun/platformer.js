@@ -13,3 +13,9 @@ function createBackgroundLayer(backgrounds,tiles){
     context.drawImage(buffer,0,0);
   };
 }
+
+function createSpriteLayer(entity){
+  return function spriteLayer(context){
+    entity.draw(context);
+  }
+}

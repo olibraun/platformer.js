@@ -18,12 +18,14 @@ loadLevel("1-1")
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
   comp.layers.push(backgroundLayer);
+  const spriteLayer = createSpriteLayer(mario);
+  comp.layers.push(spriteLayer);
 
   const timer = new Timer(1/60);
 
   timer.update = function update(deltaTime) {
     comp.draw(context);
-    mario.draw(context);
+    //mario.draw(context);
 
     mario.update(deltaTime);
     mario.vel.y += gravity;
