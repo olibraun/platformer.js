@@ -8,6 +8,7 @@ function createMario(){
   }
 
   mario.addTrait(new Velocity());
+  mario.addTrait(new Jump());
 
   return mario;
   });
