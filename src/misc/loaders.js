@@ -13,6 +13,20 @@ function loadJSON(url){
   .then(r => r.json());
 }
 
+function createTiles(level,backgrounds){
+  backgrounds.forEach(background => {
+    background.ranges.forEach(([x1,x2,y1,y2]) => {
+      for(let x = x1; x < x1+x2; x++){
+        for(let y = y1; y < y1+y2; y++){
+          level.tiles.set(x,y,{
+            name: background.name
+          });
+        }
+      }
+    });
+  });
+}
+
 function loadLevel(name){
   return loadJSON(`levels/${name}.json`)
   .then(levelSpec => Promise.all([
@@ -21,11 +35,14 @@ function loadLevel(name){
   ]))
   .then(([levelSpec,tiles]) => {
     const level = new Level();
+    createTiles(level,levelSpec.backgrounds);
 
     const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
     level.comp.layers.push(backgroundLayer);
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);
+
+    console.log(level);
 
     return level;
   });
