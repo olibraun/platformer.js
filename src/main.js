@@ -11,7 +11,6 @@ loadLevel("1-1")
 ]))
 .then(([levelSpec,tiles,mario]) => {
   const gravity = 30;
-
   mario.pos.set(64,180);
   mario.vel.set(200,-600);
 
@@ -25,8 +24,6 @@ loadLevel("1-1")
 
   timer.update = function update(deltaTime) {
     comp.draw(context);
-    //mario.draw(context);
-
     mario.update(deltaTime);
     mario.vel.y += gravity;
   }
