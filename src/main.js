@@ -19,24 +19,31 @@ loadLevel("1-1")
   loadMarioSpriteSheet()
 ]))
 .then(([levelSpec,tiles,marioSprites]) => {
+  const gravity = 0.5;
   const comp = new Compositor();
   const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
   comp.layers.push(backgroundLayer);  
 
-  const pos = {
-    x: 64,
-    y: 64
-  };
+  const mario = new Entity();
+  mario.pos.set(64,180);
+  mario.vel.set(2,-10);
+
+  mario.draw = function drawMario(context){
+    marioSprites.draw("idle",context,this.pos.x,this.pos.y);
+  }
+
+  mario.update = function updateMario(){
+    this.pos.x += this.vel.x;
+    this.pos.y += this.vel.y;
+  }
 
   function update() {
     //draw background from buffer
     comp.draw(context);
-   
-    //draw mario at pos
-    marioSprites.draw("idle",context,pos.x,pos.y);
+    mario.draw(context);
 
-    pos.x += 2;
-    pos.y += 2;
+    mario.update();
+    mario.vel.y += gravity;
     requestAnimationFrame(update);
   }
 
