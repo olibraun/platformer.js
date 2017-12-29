@@ -5,10 +5,8 @@ function createBackgroundLayer(level,tiles){
 
   const context = buffer.getContext('2d');
 
-  level.tiles.grid.forEach((column,x) => {
-    column.forEach((tile,y) => {
-      tiles.drawByIndex(tile.name, context, x, y);
-    });
+  level.tiles.forEach((tile,x,y) => {
+    tiles.drawByIndex(tile.name, context, x, y);
   });
 
   return function drawBackgroundLayer(context){
