@@ -17,7 +17,7 @@ function createMario(){
     }
 
     mario.draw = function drawMario(context){
-      marioSprites.draw(routeFrame(this), context, 0, 0);
+      marioSprites.draw(routeFrame(this), context, 0, 0, this.go.dir < 0);
     }
 
     return mario;
