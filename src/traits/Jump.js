@@ -1,5 +1,5 @@
 class Jump extends Trait {
-  constructor(){
+  constructor() {
     super('jump');
 
     this.ready = 0;
@@ -8,17 +8,21 @@ class Jump extends Trait {
     this.engageTime = 0;
   }
 
-  start(){
+  get falling() {
+    return this.ready < 0;
+  }
+
+  start() {
     if(this.ready > 0){
       this.engageTime = this.duration;
     }
   }
 
-  cancel(){
+  cancel() {
     this.engageTime = 0;
   }
 
-  obstruct(entity,side){
+  obstruct(entity,side) {
     if(side === 'bottom') {
       this.ready = 1;
     } else if (side === 'top') {
@@ -26,7 +30,7 @@ class Jump extends Trait {
     }
   }
 
-  update(entity,deltaTime){
+  update(entity,deltaTime) {
     if(this.engageTime > 0){
       entity.vel.y = -this.velocity;
       this.engageTime -= deltaTime;
