@@ -14,23 +14,36 @@ function loadJSON(url){
 }
 
 function createTiles(level, backgrounds, patterns, offsetX = 0, offsetY = 0){
-  backgrounds.forEach(background => {
-    background.ranges.forEach(([x1,x2,y1,y2]) => {
-      for(let x = x1; x < x1+x2; x++){
-        for(let y = y1; y < y1+y2; y++){
-          const derivedX = x + offsetX;
-          const derivedY = y + offsetY;
+  function applyRange(background, x1, x2, y1, y2) {
+    for(let x = x1; x < x1+x2; x++){
+      for(let y = y1; y < y1+y2; y++){
+        const derivedX = x + offsetX;
+        const derivedY = y + offsetY;
 
-          if(background.pattern) {
-            const backgrounds = patterns[background.pattern].backgrounds;
-            createTiles(level, backgrounds, patterns, derivedX, derivedY);
-          } else {
-            level.tiles.set(derivedX, derivedY, {
-              name: background.name,
-              type: background.type
-            });
-          }
+        if(background.pattern) {
+          const backgrounds = patterns[background.pattern].backgrounds;
+          createTiles(level, backgrounds, patterns, derivedX, derivedY);
+        } else {
+          level.tiles.set(derivedX, derivedY, {
+            name: background.name,
+            type: background.type
+          });
         }
+      }
+    }
+  }
+
+  backgrounds.forEach(background => {
+    background.ranges.forEach(range => {
+      if(range.length === 4) {
+        const [x1, x2, y1, y2] = range;
+        applyRange(background, x1, x2, y1, y2);
+      } else if (range.length === 3) {
+        const [x1, x2, y1] = range;
+        applyRange(background, x1, x2, y1, 1);
+      } else if (range.length === 2) {
+        const [x1, y1] = range;
+        applyRange(background, x1, 1, y1, 1);
       }
     });
   });
