@@ -9,7 +9,6 @@ loadLevel("1-1")
   createMario()
 ]))
 .then(([level,mario]) => {
-  const gravity = 2000;
   mario.pos.set(64,64);
 
   level.comp.layers.push(createCollisionLayer(level));
@@ -33,7 +32,6 @@ loadLevel("1-1")
   timer.update = function update(deltaTime) {
     level.update(deltaTime);
     level.comp.draw(context);
-    mario.vel.y += gravity * deltaTime;
   }
 
   timer.start(0);

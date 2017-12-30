@@ -1,5 +1,7 @@
 class Level{
   constructor(){
+    this.gravity = 2000;
+
     this.comp = new Compositor();
     this.entities = new Set();
     this.tiles = new Matrix();
@@ -16,6 +18,8 @@ class Level{
 
       entity.pos.y += entity.vel.y * deltaTime;
       this.tileCollider.checkY(entity);
+
+      entity.vel.y += this.gravity * deltaTime;
     });
   }
 }
