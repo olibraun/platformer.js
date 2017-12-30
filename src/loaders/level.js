@@ -1,13 +1,11 @@
-function expandSpan(xStart, xLen, yStart, yLen){
-  const coords = [];
+function* expandSpan(xStart, xLen, yStart, yLen){
   const xEnd = xStart + xLen;
   const yEnd = yStart + yLen;
   for(let x = xStart; x < xEnd; x++){
     for(let y = yStart; y < yEnd; y++){
-      coords.push({x,y});
+      yield {x,y};
     }
   }
-  return coords;
 }
 
 function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
