@@ -11,8 +11,10 @@ class TileResolver{
   getByIndex(indexX,indexY){
     const tile = this.matrix.get(indexX,indexY);
     if(tile){
+      const y1 = indexY * this.tileSize;
       return {
         tile,
+        y1
       };
     }
   }
