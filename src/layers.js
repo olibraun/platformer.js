@@ -8,7 +8,15 @@ function createBackgroundLayer(level,tiles){
 
   const context = buffer.getContext('2d');
 
-  function redraw(startIndex, endIndex){
+  let startIndex, endIndex;
+  function redraw(drawFrom, drawTo){
+    if(drawFrom === startIndex && drawTo === endIndex){
+      return;
+    }
+
+    startIndex = drawFrom;
+    endIndex = drawTo;
+
     for(let x = startIndex; x <= endIndex; ++x){
       const col = leveltiles.grid[x];
       if(col){
