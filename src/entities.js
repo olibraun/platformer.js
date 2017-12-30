@@ -5,7 +5,7 @@ function createMario(){
     mario.size.set(14,16);
 
     mario.draw = function drawMario(context){
-      marioSprites.draw('idle', context, 0, 0);
+      marioSprites.draw('run-1', context, 0, 0);
     }
 
     mario.addTrait(new Go());
