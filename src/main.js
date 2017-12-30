@@ -25,7 +25,10 @@ loadLevel("1-1")
     canvas.addEventListener(eventName, event => {
       if(event.buttons === 1) {
         mario.vel.set(0,0);
-        mario.pos.set(event.offsetX,event.offsetY);
+        mario.pos.set(
+          event.offsetX + camera.pos.x,
+          event.offsetY + camera.pos.y
+        );
       }
     });
   });
