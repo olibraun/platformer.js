@@ -1,16 +1,16 @@
 function createMario(){
-  return loadMarioSpriteSheet()
+  return loadSpriteSheet('mario')
   .then(marioSprites => {
-  const mario = new Entity();
-  mario.size.set(14,16);
+    const mario = new Entity();
+    mario.size.set(14,16);
 
-  mario.draw = function drawMario(context){
-    marioSprites.draw('idle', context, 0, 0);
-  }
+    mario.draw = function drawMario(context){
+      marioSprites.draw('idle', context, 0, 0);
+    }
 
-  mario.addTrait(new Go());
-  mario.addTrait(new Jump());
+    mario.addTrait(new Go());
+    mario.addTrait(new Jump());
 
-  return mario;
+    return mario;
   });
 }
