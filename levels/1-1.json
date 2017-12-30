@@ -12,6 +12,7 @@
     },
     {
       "name": "ground",
+      "type": "ground",
       "ranges": [
         [
           0,1000,

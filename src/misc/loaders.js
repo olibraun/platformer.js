@@ -19,7 +19,8 @@ function createTiles(level,backgrounds){
       for(let x = x1; x < x1+x2; x++){
         for(let y = y1; y < y1+y2; y++){
           level.tiles.set(x,y,{
-            name: background.name
+            name: background.name,
+            type: background.type
           });
         }
       }
