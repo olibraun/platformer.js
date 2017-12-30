@@ -1,44 +1,37 @@
 //Platformer Mario
 
-
-
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
 loadLevel("1-1")
-.then((levelSpec) => Promise.all([
-  levelSpec,
-  loadSpriteSheet(levelSpec.spritesheet),
+.then((level) => Promise.all([
+  level,
   createMario()
 ]))
-.then(([levelSpec,tiles,mario]) => {
-  const gravity = 2000;
-  mario.pos.set(64,180);
+.then(([level,mario]) => {
+  mario.pos.set(64,64);
 
-  const SPACE = 32;
-  const input = new KeyboardState();
-  input.addMapping(SPACE, keyState => {
-    if(keyState){
-      mario.jump.start();
-    } else {
-      mario.jump.cancel();
-    }
-    console.log(keyState);
-  });
+  level.comp.layers.push(createCollisionLayer(level));
+
+  level.entities.add(mario);
+
+  const input = setupKeyboard(mario);
   input.listenTo(window);
 
-  const comp = new Compositor();
-  const backgroundLayer = createBackgroundLayer(levelSpec.backgrounds,tiles);
-  comp.layers.push(backgroundLayer);
-  const spriteLayer = createSpriteLayer(mario);
-  comp.layers.push(spriteLayer);
+  ['mousedown','mousemove'].forEach(eventName => {
+    canvas.addEventListener(eventName, event => {
+      if(event.buttons === 1) {
+        mario.vel.set(0,0);
+        mario.pos.set(event.offsetX,event.offsetY);
+      }
+    });
+  });
 
   const timer = new Timer(1/60);
 
   timer.update = function update(deltaTime) {
-    mario.update(deltaTime);
-    comp.draw(context);
-    mario.vel.y += gravity * deltaTime;
+    level.update(deltaTime);
+    level.comp.draw(context);
   }
 
   timer.start(0);
