@@ -25,7 +25,6 @@ class Jump extends Trait {
   }
 
   update(entity,deltaTime){
-    console.log('can jump', this.ready);
     if(this.engageTime > 0){
       entity.vel.y = -this.velocity;
       this.engageTime -= deltaTime;
