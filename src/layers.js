@@ -21,3 +21,15 @@ function createSpriteLayer(entities){
     });
   }
 }
+
+function createCollisionLayer(level){
+  const tileResolver = level.tileCollider.tiles;
+  const tileSize = tileResolver.tileSize;
+
+  //"Spy" for getByIndex mathod
+  const getByIndexOriginal = tileResolver.getByIndex;
+  tileResolver.getByIndex = function getByIndexFake(x,y){
+    console.log(x,y);
+    return getByIndexOriginal.call(tileResolver, x, y);
+  };
+}
