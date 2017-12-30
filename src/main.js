@@ -16,21 +16,7 @@ loadLevel("1-1")
 
   level.entities.add(mario);
 
-  const SPACE = 32;
-  const input = new KeyboardState();
-  input.addMapping(SPACE, keyState => {
-    if(keyState){
-      mario.jump.start();
-    } else {
-      mario.jump.cancel();
-    }
-  });
-  input.addMapping(39, keyState => {
-    mario.go.dir = keyState;
-  });
-  input.addMapping(37, keyState => {
-    mario.go.dir = -keyState;
-  });
+  const input = setupKeyboard(mario);
   input.listenTo(window);
 
   ['mousedown','mousemove'].forEach(eventName => {
