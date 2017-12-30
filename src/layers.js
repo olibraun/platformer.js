@@ -21,7 +21,11 @@ function createBackgroundLayer(level,tiles){
       const col = leveltiles.grid[x];
       if(col){
         col.forEach((tile,y) => {
-          tiles.drawByIndex(tile.name, context, x - startIndex, y);
+          if(tile.name === 'chance'){
+            tiles.drawAnim(tile.name, context, x - startIndex, y, 1);
+          } else {
+            tiles.drawByIndex(tile.name, context, x - startIndex, y);
+          }
         })
       }
     }

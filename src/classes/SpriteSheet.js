@@ -51,6 +51,11 @@ class SpriteSheet{
     context.drawImage(buffer, x, y);
   }
 
+  drawAnim(name, context, x, y, distance){
+    const animation = this.animations.get(name);
+    this.drawByIndex(animation(distance), context, x, y);
+  }
+
   drawByIndex(name,context,row_index,col_index){
     this.draw(name,context,row_index*this.width,col_index*this.height);
   }
