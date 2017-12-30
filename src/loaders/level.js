@@ -57,6 +57,26 @@ function expandTiles(tiles, patterns){
   return expandedTiles;
 }
 
+function createCollisionGrid(tiles, patterns) {
+  const grid = new Matrix();
+
+  for(const {tile, x, y} of expandTiles(tiles, patterns)) {
+    grid.set(x, y, {type: tile.type});
+  }
+
+  return grid;
+}
+
+function createBackgroundGrid(tiles, patterns) {
+  const grid = new Matrix();
+
+  for(const {tile, x, y} of expandTiles(tiles, patterns)) {
+    grid.set(x, y, {name: tile.name});
+  }
+
+  return grid;
+}
+
 function loadLevel(name){
   return loadJSON(`levels/${name}.json`)
   .then(levelSpec => Promise.all([
@@ -65,14 +85,12 @@ function loadLevel(name){
   ]))
   .then(([levelSpec,tiles]) => {
     const level = new Level();
-    for(const {tile, x, y} of expandTiles(levelSpec.tiles, levelSpec.patterns)) {
-      level.tiles.set(x, y, {
-        name: tile.name,
-        type: tile.type
-      });
-    }
 
-    const backgroundLayer = createBackgroundLayer(level,tiles);
+    const collisionGrid = createCollisionGrid(levelSpec.tiles, levelSpec.patterns);
+    level.setCollisionGrid(collisionGrid);
+
+    const backgroundGrid = createBackgroundGrid(levelSpec.tiles, levelSpec.patterns);
+    const backgroundLayer = createBackgroundLayer(level, backgroundGrid, tiles);
     level.comp.layers.push(backgroundLayer);
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);

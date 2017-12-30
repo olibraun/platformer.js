@@ -1,6 +1,5 @@
-function createBackgroundLayer(level,tiles){
-  const leveltiles = level.tiles;
-  const resolver = level.tileCollider.tiles;
+function createBackgroundLayer(level, tiles, sprties){
+  const resolver = new TileResolver(tiles);
 
   const buffer = document.createElement('canvas');
   buffer.width = 256+16;
@@ -8,19 +7,15 @@ function createBackgroundLayer(level,tiles){
 
   const context = buffer.getContext('2d');
 
-  let startIndex, endIndex;
-  function redraw(drawFrom, drawTo){
-    startIndex = drawFrom;
-    endIndex = drawTo;
-
+  function redraw(startIndex, endIndex){
     for(let x = startIndex; x <= endIndex; ++x){
-      const col = leveltiles.grid[x];
+      const col = tiles.grid[x];
       if(col){
         col.forEach((tile,y) => {
-          if(tiles.animations.has(tile.name)){
-            tiles.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
+          if(sprties.animations.has(tile.name)){
+            sprties.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
           } else {
-            tiles.drawByIndex(tile.name, context, x - startIndex, y);
+            sprties.drawByIndex(tile.name, context, x - startIndex, y);
           }
         })
       }
