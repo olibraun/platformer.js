@@ -1,8 +1,19 @@
+function expandSpan(xStart, xLen, yStart, yLen){
+  const coords = [];
+  const xEnd = xStart + xLen;
+  const yEnd = yStart + yLen;
+  for(let x = xStart; x < xEnd; x++){
+    for(let y = yStart; y < yEnd; y++){
+      coords.push({x,y});
+    }
+  }
+  return coords;
+}
+
 function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
-  function applyRange(tile, x1, x2, y1, y2) {
-    for(let x = x1; x < x1+x2; x++){
-      for(let y = y1; y < y1+y2; y++){
-        const derivedX = x + offsetX;
+  function applyRange(tile, xStart, xLen, yStart, yLen) {
+    for(const {x,y} of expandSpan(xStart, xLen, yStart, yLen)) {
+      const derivedX = x + offsetX;
         const derivedY = y + offsetY;
 
         if(tile.pattern) {
@@ -14,7 +25,6 @@ function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
             type: tile.type
           });
         }
-      }
     }
   }
 
