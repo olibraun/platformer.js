@@ -8,37 +8,43 @@ function* expandSpan(xStart, xLen, yStart, yLen){
   }
 }
 
-function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
-  function applyRange(tile, xStart, xLen, yStart, yLen) {
-    for(const {x,y} of expandSpan(xStart, xLen, yStart, yLen)) {
-      const derivedX = x + offsetX;
-        const derivedY = y + offsetY;
+function expandRange(range) {
+  if(range.length === 4) {
+    const [x1, x2, y1, y2] = range;
+    return expandSpan(x1, x2, y1, y2);
+  } else if (range.length === 3) {
+    const [x1, x2, y1] = range;
+    return expandSpan(x1, x2, y1, 1);
+  } else if (range.length === 2) {
+    const [x1, y1] = range;
+    return expandSpan(x1, 1, y1, 1);
+  }
+}
 
-        if(tile.pattern) {
-          const tiles = patterns[tile.pattern].tiles;
-          createTiles(level, tiles, patterns, derivedX, derivedY);
-        } else {
-          level.tiles.set(derivedX, derivedY, {
-            name: tile.name,
-            type: tile.type
-          });
-        }
+function* expandRanges(ranges) {
+  for(const range of ranges) {
+    for(const item of expandRange(range)) {
+      yield item;
     }
   }
+}
 
+function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
   tiles.forEach(tile => {
-    tile.ranges.forEach(range => {
-      if(range.length === 4) {
-        const [x1, x2, y1, y2] = range;
-        applyRange(tile, x1, x2, y1, y2);
-      } else if (range.length === 3) {
-        const [x1, x2, y1] = range;
-        applyRange(tile, x1, x2, y1, 1);
-      } else if (range.length === 2) {
-        const [x1, y1] = range;
-        applyRange(tile, x1, 1, y1, 1);
+      for(const {x,y} of expandRanges(tile.ranges)) {
+        const derivedX = x + offsetX;
+          const derivedY = y + offsetY;
+  
+          if(tile.pattern) {
+            const tiles = patterns[tile.pattern].tiles;
+            createTiles(level, tiles, patterns, derivedX, derivedY);
+          } else {
+            level.tiles.set(derivedX, derivedY, {
+              name: tile.name,
+              type: tile.type
+            });
+          }
       }
-    });
   });
 }
 
