@@ -10,7 +10,7 @@ function createMario(){
 
   mario.addTrait(new Go());
   mario.addTrait(new Jump());
-  mario.addTrait(new Velocity());
+  //mario.addTrait(new Velocity());
 
   return mario;
   });

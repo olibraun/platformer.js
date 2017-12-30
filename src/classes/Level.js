@@ -11,7 +11,11 @@ class Level{
     this.entities.forEach(entity => {
       entity.update(deltaTime);
 
-      this.tileCollider.test(entity);
+      entity.pos.x += entity.vel.x * deltaTime;
+      this.tileCollider.checkX(entity);
+
+      entity.pos.y += entity.vel.y * deltaTime;
+      this.tileCollider.checkY(entity);
     });
   }
 }
