@@ -13,37 +13,37 @@ function loadJSON(url){
   .then(r => r.json());
 }
 
-function createTiles(level, backgrounds, patterns, offsetX = 0, offsetY = 0){
-  function applyRange(background, x1, x2, y1, y2) {
+function createTiles(level, tiles, patterns, offsetX = 0, offsetY = 0){
+  function applyRange(tile, x1, x2, y1, y2) {
     for(let x = x1; x < x1+x2; x++){
       for(let y = y1; y < y1+y2; y++){
         const derivedX = x + offsetX;
         const derivedY = y + offsetY;
 
-        if(background.pattern) {
-          const backgrounds = patterns[background.pattern].backgrounds;
-          createTiles(level, backgrounds, patterns, derivedX, derivedY);
+        if(tile.pattern) {
+          const tiles = patterns[tile.pattern].tiles;
+          createTiles(level, tiles, patterns, derivedX, derivedY);
         } else {
           level.tiles.set(derivedX, derivedY, {
-            name: background.name,
-            type: background.type
+            name: tile.name,
+            type: tile.type
           });
         }
       }
     }
   }
 
-  backgrounds.forEach(background => {
-    background.ranges.forEach(range => {
+  tiles.forEach(tile => {
+    tile.ranges.forEach(range => {
       if(range.length === 4) {
         const [x1, x2, y1, y2] = range;
-        applyRange(background, x1, x2, y1, y2);
+        applyRange(tile, x1, x2, y1, y2);
       } else if (range.length === 3) {
         const [x1, x2, y1] = range;
-        applyRange(background, x1, x2, y1, 1);
+        applyRange(tile, x1, x2, y1, 1);
       } else if (range.length === 2) {
         const [x1, y1] = range;
-        applyRange(background, x1, 1, y1, 1);
+        applyRange(tile, x1, 1, y1, 1);
       }
     });
   });
@@ -57,7 +57,7 @@ function loadLevel(name){
   ]))
   .then(([levelSpec,tiles]) => {
     const level = new Level();
-    createTiles(level, levelSpec.backgrounds, levelSpec.patterns);
+    createTiles(level, levelSpec.tiles, levelSpec.patterns);
 
     const backgroundLayer = createBackgroundLayer(level,tiles);
     level.comp.layers.push(backgroundLayer);

@@ -1,6 +1,6 @@
 {
   "spritesheet": "overworld",
-  "backgrounds": [
+  "tiles": [
     {
       "name": "sky",
       "ranges": [
@@ -105,6 +105,7 @@
     {
       "pattern": "cloud-single",
       "ranges": [
+        [2, 2],
         [25, 2],
         [35, 3],
         [44, 2],
@@ -121,7 +122,7 @@
   ],
   "patterns": {
     "cloud-single": {
-      "backgrounds": [
+      "tiles": [
         {
           "name": "cloud-1-1",
           "ranges": [[0,0]]
@@ -149,7 +150,7 @@
       ]
     },
     "pipe-vert-stem": {
-      "backgrounds": [
+      "tiles": [
         {
           "name": "pipe-vert-left",
           "type": "ground",
@@ -163,7 +164,7 @@
       ]
     },
     "pipe-vert-cap": {
-      "backgrounds": [
+      "tiles": [
         {
           "name": "pipe-insert-vert-left",
           "type": "ground",
@@ -177,7 +178,7 @@
       ]
     },
     "pipe-2h": {
-      "backgrounds": [
+      "tiles": [
         {
           "pattern": "pipe-vert-cap",
           "ranges": [[0,0]]
