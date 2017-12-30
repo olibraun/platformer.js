@@ -36,8 +36,11 @@ function createCollisionLayer(level){
   };
 
   return function drawCollision(context){
+    context.strokeStyle = 'blue';
     resolvedTiles.forEach(({x,y}) => {
-      console.log('Would draw',x,y);
+      context.beginPath();
+      context.rect(x*tileSize, y*tileSize, tileSize, tileSize);
+      context.stroke();
     });
 
     resolvedTiles.length=0;
