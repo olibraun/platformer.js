@@ -13,15 +13,21 @@ function loadJSON(url){
   .then(r => r.json());
 }
 
-function createTiles(level,backgrounds){
+function createTiles(level, backgrounds, patterns){
   backgrounds.forEach(background => {
     background.ranges.forEach(([x1,x2,y1,y2]) => {
       for(let x = x1; x < x1+x2; x++){
         for(let y = y1; y < y1+y2; y++){
-          level.tiles.set(x,y,{
-            name: background.name,
-            type: background.type
-          });
+          if(background.pattern) {
+            console.log('Pattern detected', patterns[background.pattern]);
+            const backgrounds = patterns[background.pattern].backgrounds;
+            createTiles(level, backgrounds, patterns);
+          } else {
+            level.tiles.set(x,y,{
+              name: background.name,
+              type: background.type
+            });
+          }
         }
       }
     });
@@ -36,7 +42,7 @@ function loadLevel(name){
   ]))
   .then(([levelSpec,tiles]) => {
     const level = new Level();
-    createTiles(level,levelSpec.backgrounds);
+    createTiles(level, levelSpec.backgrounds, levelSpec.patterns);
 
     const backgroundLayer = createBackgroundLayer(level,tiles);
     level.comp.layers.push(backgroundLayer);
