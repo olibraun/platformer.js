@@ -23,13 +23,23 @@ function createSpriteLayer(entities){
 }
 
 function createCollisionLayer(level){
+  const resolvedTiles = [];
+
   const tileResolver = level.tileCollider.tiles;
   const tileSize = tileResolver.tileSize;
 
   //"Spy" for getByIndex mathod
   const getByIndexOriginal = tileResolver.getByIndex;
   tileResolver.getByIndex = function getByIndexFake(x,y){
-    console.log(x,y);
+    resolvedTiles.push({x,y});
     return getByIndexOriginal.call(tileResolver, x, y);
   };
+
+  return function drawCollision(context){
+    resolvedTiles.forEach(({x,y}) => {
+      console.log('Would draw',x,y);
+    });
+
+    resolvedTiles.length=0;
+  }
 }

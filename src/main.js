@@ -12,7 +12,7 @@ loadLevel("1-1")
   const gravity = 2000;
   mario.pos.set(64,64);
 
-  createCollisionLayer(level);
+  level.comp.layers.push(createCollisionLayer(level));
 
   level.entities.add(mario);
 
