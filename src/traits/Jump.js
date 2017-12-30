@@ -3,7 +3,7 @@ class Jump extends Trait {
     super('jump');
 
     this.ready = 0;
-    this.duration = 0.5;
+    this.duration = 0.3;
     this.velocity = 200;
     this.engageTime = 0;
 
