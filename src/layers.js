@@ -1,6 +1,6 @@
 function createBackgroundLayer(level,tiles){
   const buffer = document.createElement('canvas');
-  buffer.width = canvas.width;
+  buffer.width = 2048;//canvas.width;
   buffer.height = canvas.height;
 
   const context = buffer.getContext('2d');
@@ -9,8 +9,8 @@ function createBackgroundLayer(level,tiles){
     tiles.drawByIndex(tile.name, context, x, y);
   });
 
-  return function drawBackgroundLayer(context){
-    context.drawImage(buffer,0,0);
+  return function drawBackgroundLayer(context, camera){
+    context.drawImage(buffer, -camera.pos.x, -camera.pos.y);
   };
 }
 
