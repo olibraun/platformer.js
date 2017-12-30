@@ -11,8 +11,9 @@ function createMario(){
 
     function routeFrame(mario){
       if(mario.go.dir !== 0){
-        console.log(mario.go.distance);
-        return 'run-1';
+        const frameIndex = Math.floor(mario.go.distance / 10) % frames.length;
+        const frameName = frames[frameIndex];
+        return frameName;
       }
       return 'idle';
     }
