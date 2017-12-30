@@ -22,7 +22,6 @@ function createTiles(level, backgrounds, patterns, offsetX = 0, offsetY = 0){
           const derivedY = y + offsetY;
 
           if(background.pattern) {
-            console.log('Pattern detected', patterns[background.pattern]);
             const backgrounds = patterns[background.pattern].backgrounds;
             createTiles(level, backgrounds, patterns, derivedX, derivedY);
           } else {

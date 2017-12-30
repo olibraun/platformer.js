@@ -105,6 +105,10 @@
         [
           5,1,
           5,1
+        ],
+        [
+          35,1,
+          11,1
         ]
       ]
     }
@@ -114,6 +118,7 @@
       "backgrounds": [
         {
           "name": "pipe-insert-vert-left",
+          "type": "ground",
           "ranges": [
             [
               0,1,
@@ -123,6 +128,7 @@
         },
         {
           "name": "pipe-insert-vert-right",
+          "type": "ground",
           "ranges": [
             [
               1,1,
@@ -131,20 +137,35 @@
           ]
         },
         {
-          "name": "pipe-vert-left",
+          "pattern": "pipe-vert",
           "ranges": [
             [
               0,1,
               1,1
             ]
           ]
-        },
+        }
+      ]
+    },
+    "pipe-vert": {
+      "backgrounds": [
         {
           "name": "pipe-vert-left",
+          "type": "ground",
+          "ranges": [
+            [
+              0,1,
+              0,1
+            ]
+          ]
+        },
+        {
+          "name": "pipe-vert-right",
+          "type": "ground",
           "ranges": [
             [
               1,1,
-              1,1
+              0,1
             ]
           ]
         }
