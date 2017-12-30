@@ -1,10 +1,15 @@
+var Sides = {
+  TOP: Symbol('top'),
+  BOTTOM: Symbol('bottom')
+};
+
 class Trait {
   constructor(name){
     this.NAME = name;
   }
 
   obstruct(){
-    
+
   }
 
   update(){

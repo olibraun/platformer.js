@@ -23,9 +23,9 @@ class Jump extends Trait {
   }
 
   obstruct(entity,side) {
-    if(side === 'bottom') {
+    if(side === Sides.BOTTOM) {
       this.ready = 1;
-    } else if (side === 'top') {
+    } else if (side === Sides.TOP) {
       this.cancel();
     }
   }
