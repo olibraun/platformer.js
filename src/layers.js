@@ -10,10 +10,6 @@ function createBackgroundLayer(level,tiles){
 
   let startIndex, endIndex;
   function redraw(drawFrom, drawTo){
-    if(drawFrom === startIndex && drawTo === endIndex){
-      return;
-    }
-
     startIndex = drawFrom;
     endIndex = drawTo;
 
@@ -22,7 +18,7 @@ function createBackgroundLayer(level,tiles){
       if(col){
         col.forEach((tile,y) => {
           if(tile.name === 'chance'){
-            tiles.drawAnim(tile.name, context, x - startIndex, y, 1);
+            tiles.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
           } else {
             tiles.drawByIndex(tile.name, context, x - startIndex, y);
           }
