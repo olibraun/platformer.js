@@ -24,7 +24,12 @@ loadLevel("1-1")
     } else {
       mario.jump.cancel();
     }
-    console.log(keyState);
+  });
+  input.addMapping(39, keyState => {
+    mario.go.dir = keyState;
+  });
+  input.addMapping(37, keyState => {
+    mario.go.dir = -keyState;
   });
   input.listenTo(window);
 
