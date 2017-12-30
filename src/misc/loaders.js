@@ -67,6 +67,13 @@ function loadSpriteSheet(name){
       });
     }
 
+    if(spec.animations){
+      spec.animations.forEach(animSpec => {
+        const animation = createAnim(animSpec.frames, animSpec.frameLen);
+        tiles.defineAnim(animSpec.name, animation);
+      });
+    }
+    
     return tiles;
   });
 }

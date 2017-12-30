@@ -75,5 +75,17 @@
       "name": "cloud-2-3",
       "index": [2, 21]
     }
+  ],
+
+  "animations": [
+    {
+      "name": "chance",
+      "frameLen": 1,
+      "frames": [
+        "chance-1",
+        "chance-2",
+        "chance-3"
+      ]
+    }
   ]
 }
