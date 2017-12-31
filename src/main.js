@@ -7,20 +7,12 @@ async function main(canvas){
   const entityFactory = await loadEntities();
   const loadLevel = await createLevelLoader(entityFactory);
   const level = await loadLevel('1-1');
-  
+
   const camera = new Camera();
   window.camera = camera;
 
   const mario = entityFactory.mario();
   mario.pos.set(64,64);
-
-  const goomba = entityFactory.goomba();
-  goomba.pos.x = 208;
-  level.entities.add(goomba);
-
-  const koopa = entityFactory.koopa();
-  koopa.pos.x = 192;
-  level.entities.add(koopa);
 
   level.comp.layers.push(
     createCollisionLayer(level),
