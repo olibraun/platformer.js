@@ -9,8 +9,13 @@ class GoombaBehavior extends Trait {
   }
 
   collides(us, them) {
+    if(us.killable.dead) {
+      return;
+    }
+    
     if(them.stomper) {
       us.killable.kill();
+      them.stomper.bounce();
       us.pendulumWalk.speed = 0;
     }
   }
@@ -23,7 +28,7 @@ function createGoombaFactory(sprite) {
     if(goomba.killable.dead) {
       return 'flat';
     }
-    
+
     return walkAnim(goomba.lifetime)
   }
 
