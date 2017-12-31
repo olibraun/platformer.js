@@ -1,5 +1,12 @@
 //Platformer Mario
 
+function createPlayerEnvironment(playerEntity) {
+  const playerEnv = new Entity();
+  const playerControl = new PlayerController();
+  playerControl.setPlayer(playerEntity);
+  playerEnv.addTrait(playerControl);
+  return playerEnv;
+}
 
 async function main(canvas){
   const context = canvas.getContext('2d');
@@ -21,6 +28,9 @@ async function main(canvas){
 
   level.entities.add(mario);
 
+  const playerEnv = createPlayerEnvironment(mario);
+  level.entities.add(playerEnv);
+
   const input = setupKeyboard(mario);
   input.listenTo(window);
 
@@ -32,7 +42,7 @@ async function main(canvas){
     level.update(deltaTime);
 
     if(mario.pos.x > 100){
-      camera.pos.x = mario.pos.x - 100;
+      camera.pos.x = Math.max(0, mario.pos.x - 100);
     }
     
     level.comp.draw(context, camera);
