@@ -3,11 +3,11 @@
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-loadLevel("1-1")
-.then((level) => Promise.all([
-  level,
+
+Promise.all([
+  loadLevel("1-1"),
   createMario()
-]))
+])
 .then(([level,mario]) => {
   const camera = new Camera();
   window.camera = camera;
