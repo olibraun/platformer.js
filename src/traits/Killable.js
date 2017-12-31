@@ -19,7 +19,9 @@ class Killable extends Trait {
     if(this.dead) {
       this.deadTime += deltaTime;
       if(this.deadTime > this.removeAfter) {
-        level.entities.delete(entity);
+        this.queue(() => {
+          level.entities.delete(entity);
+        });
       }
     }
   }
