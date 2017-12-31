@@ -34,7 +34,8 @@ function createMarioFactory(marioSprites) {
     const mario = new Entity();
     mario.size.set(14,16);
 
-    mario.addTrait(new Go());    
+    mario.addTrait(new Solid());
+    mario.addTrait(new Go());
     mario.addTrait(new Jump());
     mario.addTrait(new Stomper());
     mario.addTrait(new Killable());
