@@ -1,7 +1,7 @@
 const SLOW_DRAG = 1/1000;
 const FAST_DRAG = 1/5000;
 
-function createMario(){
+function loadMario(){
   return loadSpriteSheet('mario')
   .then(marioSprites => {
     const mario = new Entity();

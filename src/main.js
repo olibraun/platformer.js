@@ -6,7 +6,7 @@ const context = canvas.getContext('2d');
 
 Promise.all([
   loadLevel("1-1"),
-  createMario()
+  loadMario()
 ])
 .then(([level,mario]) => {
   const camera = new Camera();
