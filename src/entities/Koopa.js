@@ -13,6 +13,8 @@ class KoopaBehavior extends Trait {
 
     this.hideTime = 0;
     this.hideDuration = 5;
+
+    this.walkSpeed = null;
     this.panicSpeed = 300;
 
     this.state = STATE_WALKING;
@@ -61,12 +63,16 @@ class KoopaBehavior extends Trait {
   hide(us) {
     us.vel.x = 0;
     us.pendulumWalk.enabled = false;
+    if(this.walkSpeed === null) {
+      this.walkSpeed = us.pendulumWalk.speed;
+    }
     this.hideTime = 0;
     this.state = STATE_HIDING;
   }
 
   unhide(us) {
     us.pendulumWalk.enabled = true;
+    us.pendulumWalk.speed = this.walkSpeed;
     this.state = STATE_WALKING;
   }
 
