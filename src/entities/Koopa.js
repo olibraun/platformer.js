@@ -3,6 +3,28 @@ function loadKoopa() {
   .then(createKoopaFactory);
 }
 
+class KoopaBehavior extends Trait {
+  constructor() {
+    super('behavior');
+  }
+
+  collides(us, them) {
+    if(us.killable.dead) {
+      return;
+    }
+
+    if(them.stomper) {
+      if (them.vel.y > us.vel.y) {
+        us.killable.kill();
+        them.stomper.bounce();
+        us.pendulumWalk.speed = 0;
+      } else {
+        them.killable.kill();
+      }
+    }
+  }
+}
+
 function createKoopaFactory(sprite) {
   const walkAnim = sprite.animations.get('walk');
 
@@ -18,6 +40,8 @@ function createKoopaFactory(sprite) {
     koopa.draw = drawKoopa;
 
     koopa.addTrait(new PendulumWalk());
+    koopa.addTrait(new Killable());
+    koopa.addTrait(new KoopaBehavior());
 
     return koopa;
   }
