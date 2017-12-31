@@ -122,6 +122,7 @@ function createKoopaFactory(sprite) {
 
     koopa.draw = drawKoopa;
 
+    koopa.addTrait(new Solid());
     koopa.addTrait(new PendulumMove());
     koopa.addTrait(new Killable());
     koopa.addTrait(new KoopaBehavior());
