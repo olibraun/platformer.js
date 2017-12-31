@@ -1,9 +1,14 @@
 class Solid extends Trait {
   constructor() {
     super('solid');
+    this.obstructs = true;
   }
 
   obstruct(entity, side, match) {
+    if(!this.obstructs) {
+      return;
+    }
+    
     if(side === Sides.BOTTOM) {
       entity.bounds.bottom = match.y1;
       entity.vel.y = 0;
