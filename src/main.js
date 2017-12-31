@@ -6,11 +6,9 @@ const context = canvas.getContext('2d');
 
 Promise.all([
   loadLevel("1-1"),
-  loadMario(),
-  loadGoomba(),
-  loadKoopa()
+  loadEntities()
 ])
-.then(([level,createMario, createGoomba, createKoopa]) => {
+.then(([level, [createMario, createGoomba, createKoopa]]) => {
   const camera = new Camera();
   window.camera = camera;
 
