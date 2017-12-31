@@ -8,18 +8,18 @@ Promise.all([
   loadLevel("1-1"),
   loadEntities()
 ])
-.then(([level, [createMario, createGoomba, createKoopa]]) => {
+.then(([level, entities]) => {
   const camera = new Camera();
   window.camera = camera;
 
-  const mario = createMario();
+  const mario = entities.mario();
   mario.pos.set(64,64);
 
-  const goomba = createGoomba();
+  const goomba = entities.goomba();
   goomba.pos.x = 208;
   level.entities.add(goomba);
 
-  const koopa = createKoopa();
+  const koopa = entities.koopa();
   koopa.pos.x = 208-16;
   level.entities.add(koopa);
 
