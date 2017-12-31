@@ -25,10 +25,10 @@ Promise.all([
   koopa.pos.x = 208-16;
   level.entities.add(koopa);
 
-  // level.comp.layers.push(
-  //   createCollisionLayer(level),
-  //   createCameraLayer(camera)
-  // );
+  level.comp.layers.push(
+    createCollisionLayer(level),
+    createCameraLayer(camera)
+  );
 
   level.entities.add(mario);
 

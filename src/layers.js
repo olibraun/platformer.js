@@ -87,7 +87,7 @@ function createCollisionLayer(level){
       context.beginPath();
       context.rect(
         entity.pos.x - camera.pos.x,
-        entity.pos.y - camera.pos.y,
+        entity.pos.y - camera.pos.y + entity.offset.y,
         entity.size.x,
         entity.size.y);
       context.stroke();
