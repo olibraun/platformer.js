@@ -14,6 +14,10 @@ class Trait {
 
   }
 
+  collides(us, them) {
+    
+  }
+
   update(){
     console.warn('unhandled update call in trait');
   }
@@ -38,9 +42,15 @@ class Entity{
     this[trait.NAME] = trait;
   }
 
+  collides(candidate) {
+    this.traits.forEach(trait => {
+      trait.collides(this, candidate);
+    });
+  }
+
   obstruct(side){
     this.traits.forEach(trait => {
-      trait.obstruct(this,side);
+      trait.obstruct(this, side);
     });
   }
 
