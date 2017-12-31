@@ -1,6 +1,6 @@
 class PendulumWalk extends Trait {
   constructor() {
-    super('pendukumWalk');
+    super('pendulumWalk');
     this.speed = -30;
   }
 
