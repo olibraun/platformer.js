@@ -20,7 +20,7 @@ Promise.all([
   level.entities.add(goomba);
 
   const koopa = entities.koopa();
-  koopa.pos.x = 208-16;
+  koopa.pos.x = 192;
   level.entities.add(koopa);
 
   level.comp.layers.push(
