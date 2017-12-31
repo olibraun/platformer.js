@@ -1,10 +1,14 @@
 function loadEntities() {
   const entityFactories = {};
 
+  function addAs(name) {
+    return factory => entityFactories[name] = factory;
+  }
+
   return Promise.all([
-    loadMario().then(factory => entityFactories['mario'] = factory),
-    loadGoomba().then(factory => entityFactories['goomba'] = factory),
-    loadKoopa().then(factory => entityFactories['koopa'] = factory)
+    loadMario().then(addAs('mario')),
+    loadGoomba().then(addAs('goomba')),
+    loadKoopa().then(addAs('koopa'))
   ])
   .then(() => entityFactories);
 }
