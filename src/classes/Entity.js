@@ -19,7 +19,7 @@ class Trait {
   }
 
   update(){
-    console.warn('unhandled update call in trait');
+    
   }
 }
 
