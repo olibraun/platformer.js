@@ -16,7 +16,7 @@ class GoombaBehavior extends Trait {
     if(them.stomper) {
       if (them.vel.y > us.vel.y) {
         us.killable.kill();
-        us.pendulumWalk.speed = 0;
+        us.pendulumMove.speed = 0;
       } else {
         them.killable.kill();
       }
@@ -45,7 +45,7 @@ function createGoombaFactory(sprite) {
 
     goomba.draw = drawGoomba;
 
-    goomba.addTrait(new PendulumWalk());
+    goomba.addTrait(new PendulumMove());
     goomba.addTrait(new GoombaBehavior());
     goomba.addTrait(new Killable());
 

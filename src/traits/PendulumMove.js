@@ -1,6 +1,6 @@
-class PendulumWalk extends Trait {
+class PendulumMove extends Trait {
   constructor() {
-    super('pendulumWalk');
+    super('pendulumMove');
     this.enabled = true;
     this.speed = -30;
   }

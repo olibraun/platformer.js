@@ -62,23 +62,23 @@ class KoopaBehavior extends Trait {
 
   hide(us) {
     us.vel.x = 0;
-    us.pendulumWalk.enabled = false;
+    us.pendulumMove.enabled = false;
     if(this.walkSpeed === null) {
-      this.walkSpeed = us.pendulumWalk.speed;
+      this.walkSpeed = us.pendulumMove.speed;
     }
     this.hideTime = 0;
     this.state = STATE_HIDING;
   }
 
   unhide(us) {
-    us.pendulumWalk.enabled = true;
-    us.pendulumWalk.speed = this.walkSpeed;
+    us.pendulumMove.enabled = true;
+    us.pendulumMove.speed = this.walkSpeed;
     this.state = STATE_WALKING;
   }
 
   panic(us, them) {
-    us.pendulumWalk.enabled = true;
-    us.pendulumWalk.speed = this.panicSpeed * Math.sign(them.vel.x);
+    us.pendulumMove.enabled = true;
+    us.pendulumMove.speed = this.panicSpeed * Math.sign(them.vel.x);
     this.state = STATE_PANIC;
   }
 
@@ -122,7 +122,7 @@ function createKoopaFactory(sprite) {
 
     koopa.draw = drawKoopa;
 
-    koopa.addTrait(new PendulumWalk());
+    koopa.addTrait(new PendulumMove());
     koopa.addTrait(new Killable());
     koopa.addTrait(new KoopaBehavior());
 
