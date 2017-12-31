@@ -3,6 +3,7 @@
 function createPlayerEnvironment(playerEntity) {
   const playerEnv = new Entity();
   const playerControl = new PlayerController();
+  playerControl.checkpoint.set(64, 64);
   playerControl.setPlayer(playerEntity);
   playerEnv.addTrait(playerControl);
   return playerEnv;
@@ -19,14 +20,11 @@ async function main(canvas){
   window.camera = camera;
 
   const mario = entityFactory.mario();
-  mario.pos.set(64,64);
 
   level.comp.layers.push(
     createCollisionLayer(level),
     createCameraLayer(camera)
   );
-
-  level.entities.add(mario);
 
   const playerEnv = createPlayerEnvironment(mario);
   level.entities.add(playerEnv);
