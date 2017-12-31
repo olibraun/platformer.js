@@ -77,6 +77,27 @@ function createBackgroundGrid(tiles, patterns) {
   return grid;
 }
 
+function setupCollision(levelSpec, level) {
+  const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
+    return mergedTiles.concat(layerSpec.tiles);
+  }, []);
+  const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
+  level.setCollisionGrid(collisionGrid);
+}
+
+function setupBackgrounds(levelSpec, level, tiles) {
+  levelSpec.layers.forEach(layer => {
+    const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
+    const backgroundLayer = createBackgroundLayer(level, backgroundGrid, tiles);
+    level.comp.layers.push(backgroundLayer);
+  });
+}
+
+function setupEntities(levelSpec, level) {
+  const spriteLayer = createSpriteLayer(level.entities);
+  level.comp.layers.push(spriteLayer);
+}
+
 function loadLevel(name){
   return loadJSON(`levels/${name}.json`)
   .then(levelSpec => Promise.all([
@@ -86,19 +107,9 @@ function loadLevel(name){
   .then(([levelSpec,tiles]) => {
     const level = new Level();
 
-    const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
-      return mergedTiles.concat(layerSpec.tiles);
-    }, []);
-    const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-    level.setCollisionGrid(collisionGrid);
-
-    levelSpec.layers.forEach(layer => {
-      const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-      const backgroundLayer = createBackgroundLayer(level, backgroundGrid, tiles);
-      level.comp.layers.push(backgroundLayer);
-    })
-    const spriteLayer = createSpriteLayer(level.entities);
-    level.comp.layers.push(spriteLayer);
+    setupCollision(levelSpec, level);
+    setupBackgrounds(levelSpec, level, tiles);
+    setupEntities(levelSpec, level);
 
     return level;
   });
