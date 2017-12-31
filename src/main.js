@@ -7,9 +7,10 @@ const context = canvas.getContext('2d');
 Promise.all([
   loadLevel("1-1"),
   loadMario(),
-  loadGoomba()
+  loadGoomba(),
+  loadKoopa()
 ])
-.then(([level,createMario, createGoomba]) => {
+.then(([level,createMario, createGoomba, createKoopa]) => {
   const camera = new Camera();
   window.camera = camera;
 
@@ -19,6 +20,10 @@ Promise.all([
   const goomba = createGoomba();
   goomba.pos.x = 208;
   level.entities.add(goomba);
+
+  const koopa = createKoopa();
+  koopa.pos.x = 208-16;
+  level.entities.add(koopa);
 
   // level.comp.layers.push(
   //   createCollisionLayer(level),
