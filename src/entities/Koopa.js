@@ -3,9 +3,15 @@ function loadKoopa() {
   .then(createKoopaFactory);
 }
 
+const STATE_WALKING = Symbol('walking');
+const STATE_HIDING = Symbol('hiding');
+
 class KoopaBehavior extends Trait {
   constructor() {
     super('behavior');
+    this.state = STATE_WALKING;
+    this.hideTime = 0;
+    this.hideDuration = 5;
   }
 
   collides(us, them) {
@@ -15,11 +21,37 @@ class KoopaBehavior extends Trait {
 
     if(them.stomper) {
       if (them.vel.y > us.vel.y) {
-        us.killable.kill();
+        this.handleStomp(us, them);
         them.stomper.bounce();
-        us.pendulumWalk.speed = 0;
       } else {
         them.killable.kill();
+      }
+    }
+  }
+
+  handleStomp(us, them){
+    if(this.state === STATE_WALKING) {
+      this.hide(us);
+    }
+  }
+
+  hide(us) {
+    us.vel.x = 0;
+    us.pendulumWalk.speed = 0;
+    this.hideTime = 0;
+    this.state = STATE_HIDING;
+  }
+
+  unhide(us) {
+    us.pendulumWalk.speed = 100;
+    this.state = STATE_WALKING;
+  }
+
+  update(us, deltaTime) {
+    if(this.state === STATE_HIDING) {
+      this.hideTime += deltaTime;
+      if(this.hideTime > this.hideDuration) {
+        this.unhide(us);
       }
     }
   }
@@ -29,6 +61,9 @@ function createKoopaFactory(sprite) {
   const walkAnim = sprite.animations.get('walk');
 
   function routeAnim(koopa) {
+    if(koopa.behavior.state === STATE_HIDING) {
+      return 'hiding';
+    }
     return walkAnim(koopa.lifetime);
   }
 
