@@ -7,6 +7,21 @@ function loadMario(){
 }
 
 function createMarioFactory(marioSprites) {
+  const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 7);
+
+  function routeFrame(mario){
+    if(mario.jump.falling) {
+      return 'jump';
+    }
+    if(mario.go.distance > 0) {
+      if(mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0){
+        return "brake";
+      }
+      return runAnim(mario.go.distance);
+    }
+    return 'idle';
+  }
+
   return function createMario() {
     const mario = new Entity();
     mario.size.set(14,16);
@@ -18,21 +33,6 @@ function createMarioFactory(marioSprites) {
 
     mario.turbo = function setTurboState(turboOn) {
       this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG;
-    }
-
-    const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 7);
-
-    function routeFrame(mario){
-      if(mario.jump.falling) {
-        return 'jump';
-      }
-      if(mario.go.distance > 0) {
-        if(mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0){
-          return "brake";
-        }
-        return runAnim(mario.go.distance);
-      }
-      return 'idle';
     }
 
     mario.draw = function drawMario(context){
