@@ -1,6 +1,8 @@
 var Sides = {
   TOP: Symbol('top'),
-  BOTTOM: Symbol('bottom')
+  BOTTOM: Symbol('bottom'),
+  LEFT: Symbol('left'),
+  RIGHT: Symbol('right')
 };
 
 class Trait {
