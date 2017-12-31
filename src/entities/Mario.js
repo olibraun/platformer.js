@@ -3,40 +3,42 @@ const FAST_DRAG = 1/5000;
 
 function loadMario(){
   return loadSpriteSheet('mario')
-  .then(marioSprites => {
-    return function createMario() {
-      const mario = new Entity();
-      mario.size.set(14,16);
+  .then(createMarioFactory);
+}
 
-      mario.addTrait(new Go());
-      mario.go.dragFactor = SLOW_DRAG;
-      
-      mario.addTrait(new Jump());
+function createMarioFactory(marioSprites) {
+  return function createMario() {
+    const mario = new Entity();
+    mario.size.set(14,16);
 
-      mario.turbo = function setTurboState(turboOn) {
-        this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG;
-      }
+    mario.addTrait(new Go());
+    mario.go.dragFactor = SLOW_DRAG;
+    
+    mario.addTrait(new Jump());
 
-      const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 7);
-
-      function routeFrame(mario){
-        if(mario.jump.falling) {
-          return 'jump';
-        }
-        if(mario.go.distance > 0) {
-          if(mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0){
-            return "brake";
-          }
-          return runAnim(mario.go.distance);
-        }
-        return 'idle';
-      }
-
-      mario.draw = function drawMario(context){
-        marioSprites.draw(routeFrame(this), context, 0, 0, this.go.heading < 0);
-      }
-
-      return mario;
+    mario.turbo = function setTurboState(turboOn) {
+      this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG;
     }
-  });
+
+    const runAnim = createAnim(['run-1', 'run-2', 'run-3'], 7);
+
+    function routeFrame(mario){
+      if(mario.jump.falling) {
+        return 'jump';
+      }
+      if(mario.go.distance > 0) {
+        if(mario.vel.x > 0 && mario.go.dir < 0 || mario.vel.x < 0 && mario.go.dir > 0){
+          return "brake";
+        }
+        return runAnim(mario.go.distance);
+      }
+      return 'idle';
+    }
+
+    mario.draw = function drawMario(context){
+      marioSprites.draw(routeFrame(this), context, 0, 0, this.go.heading < 0);
+    }
+
+    return mario;
+  }
 }
