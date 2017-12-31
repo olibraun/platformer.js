@@ -38,7 +38,11 @@ class KoopaBehavior extends Trait {
     } else if (this.state === STATE_HIDING) {
       this.panic(us, them);
     } else if (this.state === STATE_PANIC) {
-      them.killable.kill();
+      const travelDir = Math.sign(us.vel.x);
+      const impactDir = Math.sign(us.pos.x - them.pos.x);
+      if(travelDir !== 0 && travelDir !== impactDir) {
+        them.killable.kill();
+      }
     }
   }
 
