@@ -7,6 +7,7 @@ class Level{
     this.entities = new Set();
 
     this.tileCollider = null;
+    this.entityCollider = new EntityCollider(this.entities);
   }
 
   setCollisionGrid(matrix) {
@@ -22,6 +23,8 @@ class Level{
 
       entity.pos.y += entity.vel.y * deltaTime;
       this.tileCollider.checkY(entity);
+
+      this.entityCollider.check(entity);
 
       entity.vel.y += this.gravity * deltaTime;
     });
