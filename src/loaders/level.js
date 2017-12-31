@@ -86,24 +86,27 @@ function setupBackgrounds(levelSpec, level, tiles) {
   });
 }
 
-function setupEntities(levelSpec, level) {
+function setupEntities(levelSpec, level, entityFactory) {
+  console.log(levelSpec.entities, entityFactory);
   const spriteLayer = createSpriteLayer(level.entities);
   level.comp.layers.push(spriteLayer);
 }
 
-function loadLevel(name){
-  return loadJSON(`levels/${name}.json`)
-  .then(levelSpec => Promise.all([
-    levelSpec,
-    loadSpriteSheet(levelSpec.spritesheet)
-  ]))
-  .then(([levelSpec,tiles]) => {
-    const level = new Level();
-
-    setupCollision(levelSpec, level);
-    setupBackgrounds(levelSpec, level, tiles);
-    setupEntities(levelSpec, level);
-
-    return level;
-  });
-}
+function createLevelLoader(entityFactory) {
+  return function loadLevel(name){
+    return loadJSON(`levels/${name}.json`)
+    .then(levelSpec => Promise.all([
+      levelSpec,
+      loadSpriteSheet(levelSpec.spritesheet)
+    ]))
+    .then(([levelSpec,tiles]) => {
+      const level = new Level();
+  
+      setupCollision(levelSpec, level);
+      setupBackgrounds(levelSpec, level, tiles);
+      setupEntities(levelSpec, level, entityFactory);
+  
+      return level;
+    });
+  }
+} 

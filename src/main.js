@@ -3,11 +3,15 @@
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-
-Promise.all([
-  loadLevel("1-1"),
-  loadEntities()
-])
+loadEntities()
+.then(entityFactory => Promise.all([
+  createLevelLoader(entityFactory),
+  entityFactory
+]))
+.then(([loadLevel, entityFactory]) => Promise.all([
+  loadLevel('1-1'),
+  entityFactory
+]))
 .then(([level, entityFactory]) => {
   const camera = new Camera();
   window.camera = camera;
