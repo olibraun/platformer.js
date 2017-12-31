@@ -25,6 +25,8 @@ class Trait {
 
 class Entity{
   constructor(){
+    this.canCollide = true;
+    
     this.pos = new Vec2(0,0);
     this.vel = new Vec2(0,0);
     this.size = new Vec2(0,0);
