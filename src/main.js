@@ -21,10 +21,10 @@ async function main(canvas){
 
   const mario = entityFactory.mario();
 
-  level.comp.layers.push(
-    createCollisionLayer(level),
-    createCameraLayer(camera)
-  );
+  // level.comp.layers.push(
+  //   createCollisionLayer(level),
+  //   createCameraLayer(camera)
+  // );
 
   const playerEnv = createPlayerEnvironment(mario);
   level.entities.add(playerEnv);
