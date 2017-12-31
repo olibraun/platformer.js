@@ -3,6 +3,16 @@ function loadGoomba() {
   .then(createGoombaFactory);
 }
 
+class GoombaBehavior extends Trait {
+  constructor() {
+    super('behavior');
+  }
+
+  collides(us, them) {
+    us.pendulumWalk.speed = 0;
+  }
+}
+
 function createGoombaFactory(sprite) {
   const walkAnim = sprite.animations.get('walk');
 
@@ -17,6 +27,7 @@ function createGoombaFactory(sprite) {
     goomba.draw = drawGoomba;
 
     goomba.addTrait(new PendulumWalk());
+    goomba.addTrait(new GoombaBehavior());
 
     return goomba;
   }
