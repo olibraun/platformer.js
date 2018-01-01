@@ -5,51 +5,51 @@
   "tiles": [
     {
       "name": "ground",
-      "index": [0, 2]
+      "index": [2, 5]
     },
     {
       "name": "sky",
-      "index": [13, 3]
+      "index": [13, 1]
     },
     {
       "name": "chocolate",
-      "index": [0,3]
+      "index": [0, 5]
     },
     {
       "name": "bricks",
-      "index": [1,2]
+      "index": [1, 4]
     },
     {
       "name": "chance",
-      "index": [24, 2]
+      "index": [24, 4]
     },
     {
       "name": "chance-1",
-      "index": [24, 2]
+      "index": [24, 4]
     },
     {
       "name": "chance-2",
-      "index": [25, 2]
+      "index": [25, 4]
     },
     {
       "name": "chance-3",
-      "index": [26, 2]
+      "index": [26, 4]
     },
     {
       "name": "pipe-insert-vert-left",
-      "index": [0, 8]
+      "index": [0, 16]
     },
     {
       "name": "pipe-insert-vert-right",
-      "index": [1, 8]
+      "index": [1, 16]
     },
     {
       "name": "pipe-vert-left",
-      "index": [0, 9]
+      "index": [0, 17]
     },
     {
       "name": "pipe-vert-right",
-      "index": [1, 9]
+      "index": [1, 17]
     },
     {
       "name": "cloud-1-1",
