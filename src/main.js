@@ -29,6 +29,8 @@ async function main(canvas){
   //   createCameraLayer(camera)
   // );
 
+  level.comp.layers.push(createDashboardLayer(font));
+
   const playerEnv = createPlayerEnvironment(mario);
   level.entities.add(playerEnv);
 
@@ -45,8 +47,6 @@ async function main(canvas){
     camera.pos.x = Math.max(0, mario.pos.x - 100);
     
     level.comp.draw(context, camera);
-
-    font.draw('A', context, 0, 0);
   }
 
   timer.start(0);
