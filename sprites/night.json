@@ -74,6 +74,42 @@
     {
       "name": "cloud-2-3",
       "index": [2, 21]
+    },
+    {
+      "name": "mountain-1-1",
+      "index": [8, 14]
+    },
+    {
+      "name": "mountain-1-2",
+      "index": [9, 14]
+    },
+    {
+      "name": "mountain-1-3",
+      "index": [10, 14]
+    },
+    {
+      "name": "mountain-2-1",
+      "index": [8, 15]
+    },
+    {
+      "name": "mountain-2-2",
+      "index": [9, 15]
+    },
+    {
+      "name": "mountain-2-3",
+      "index": [10, 15]
+    },
+    {
+      "name": "bush-left",
+      "index": [11, 15]
+    },
+    {
+      "name": "bush-middle",
+      "index": [12, 15]
+    },
+    {
+      "name": "bush-right",
+      "index": [13, 15]
     }
   ],
 
