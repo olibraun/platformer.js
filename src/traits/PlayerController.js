@@ -16,7 +16,7 @@ class PlayerController extends Trait {
       this.player.pos.set(this.checkpoint.x, this.checkpoint.y);
       level.entities.add(this.player);
     } else {
-      this.time -= deltaTime;
+      this.time -= deltaTime * 2;
     }
   }
 }
