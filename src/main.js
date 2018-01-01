@@ -24,13 +24,6 @@ async function main(canvas){
 
   const mario = entityFactory.mario();
 
-  // level.comp.layers.push(
-  //   createCollisionLayer(level),
-  //   createCameraLayer(camera)
-  // );
-
-  level.comp.layers.push(createDashboardLayer(font));
-
   const playerEnv = createPlayerEnvironment(mario);
   level.entities.add(playerEnv);
 
@@ -38,6 +31,13 @@ async function main(canvas){
   input.listenTo(window);
 
   //setupMouseControl(canvas,mario,camera);
+
+  // level.comp.layers.push(
+  //   createCollisionLayer(level),
+  //   createCameraLayer(camera)
+  // );
+
+  level.comp.layers.push(createDashboardLayer(font, playerEnv));
 
   const timer = new Timer(1/60);
 
