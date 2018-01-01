@@ -7,36 +7,61 @@
           "name": "sky",
           "ranges": [
             [
-              0,1000,
-              0,15
+              0, 1000,
+              0, 15
             ]
           ]
+        }
+      ]
+    },
+    {
+      "tiles": [
+        {
+          "pattern": "mountain-small",
+          "ranges": [
+            [16, 11],
+            [64, 11]
+          ]
         },
+        {
+          "pattern": "mountain-big",
+          "ranges": [
+            [0, 10],
+            [48, 10]
+          ]
+        },
+        {
+          "pattern": "bush-1",
+          "ranges": [
+            [23, 12],
+            [71, 12]
+          ]
+        },
+        {
+          "pattern": "bush-2",
+          "ranges": [
+            [41, 12]
+          ]
+        },
+        {
+          "pattern": "bush-3",
+          "ranges": [
+            [11, 12],
+            [59, 12],
+            [71, 12]
+          ]
+        }
+      ]
+    },
+    {
+      "tiles": [    
         {
           "name": "ground",
           "type": "ground",
           "ranges": [
             [
-              0,1000,
-              13,2
-            ],
-            [
-              2,12
-            ],
-            [
-              5,3,
-              10
-            ],
-            [
-              11, 9
-            ],
-            [
-              11,5,
-              10
-            ],
-            [
-              9,1,
-              0,7
+              0, 1000,
+              13, 2
             ]
           ]
         },
@@ -44,8 +69,12 @@
           "name": "sky",
           "ranges": [
             [
-              50,2,
-              13,2
+              69, 2,
+              13, 2
+            ],
+            [
+              86, 3,
+              13, 2
             ]
           ]
         }
@@ -57,26 +86,22 @@
           "name": "bricks",
           "type": "ground",
           "ranges": [
-            [
-              21,2,
-              9
-            ],
-            [
-              24,2,
-              9
-            ]
+            [20, 9],
+            [22, 9],
+            [24, 9],
+            [77, 9],
+            [79, 9]
           ]
         },
         {
           "name": "chance",
           "type": "ground",
           "ranges": [
-            [
-              3,7
-            ],
-            [
-              23,9
-            ]
+            [16, 9],
+            [21, 9],
+            [23, 9],
+            [78, 9],
+            [22, 5]
           ]
         },
         {
@@ -84,23 +109,7 @@
           "type": "ground",
           "ranges": [
             [
-              30,5,
-              12
-            ],
-            [
-              31,4,
-              11
-            ],
-            [
-              32,3,
-              10
-            ],
-            [
-              33,2,
-              9
-            ],
-            [
-              34,8
+              0, 12
             ]
           ]
         }
@@ -110,9 +119,17 @@
       "tiles": [
         {
           "pattern": "pipe-2h",
+          "ranges": [[28, 11]]
+        },
+        {
+          "pattern": "pipe-3h",
+          "ranges": [[38, 10]]
+        },
+        {
+          "pattern": "pipe-4h",
           "ranges": [
-            [5,5],
-            [35,11]
+            [46, 9],
+            [57, 9]
           ]
         },
         {
@@ -203,8 +220,139 @@
           "ranges": [[0,1]]
         }
       ]
+    },
+    "pipe-3h": {
+      "tiles": [
+        {
+          "pattern": "pipe-2h",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "pipe-vert-stem",
+          "ranges": [[0, 2]]
+        }
+      ]
+    },
+    "pipe-4h": {
+      "tiles": [
+        {
+          "pattern": "pipe-3h",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "pipe-vert-stem",
+          "ranges": [[0, 3]]
+        }
+      ]
+    },
+    "mountain-small": {
+      "tiles": [
+        {
+          "name": "mountain-1-2",
+          "ranges": [[1, 0]]
+        },
+        {
+          "name": "mountain-1-1",
+          "ranges": [[0, 1]]
+        },
+        {
+          "name": "mountain-2-1",
+          "ranges": [[1, 1]]
+        },
+        {
+          "name": "mountain-1-3",
+          "ranges": [[2, 1]]
+        }
+      ]
+    },
+    "mountain-big": {
+      "tiles": [
+        {
+          "pattern": "mountain-small",
+          "ranges": [[1, 0]]
+        },
+        {
+          "name": "mountain-1-1",
+          "ranges": [[0, 2]]
+        },
+        {
+          "name": "mountain-2-1",
+          "ranges": [[1,2]]
+        },
+        {
+          "name": "mountain-2-2",
+          "ranges": [[2, 2]]
+        },
+        {
+          "name": "mountain-2-3",
+          "ranges": [[3, 2]]
+        },
+        {
+          "name": "mountain-1-3",
+          "ranges": [[4, 2]]
+        }
+      ]
+    },
+    "bush-1": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[2, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [[1, 0]]
+        }
+      ]
+    },
+    "bush-2": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[3, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [
+            [
+              1, 2,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "bush-3": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[4, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [
+            [
+              1, 3,
+              0
+            ]
+          ]
+        }
+      ]
     }
   },
+
   "entities": [
     {
       "name": "koopa",
