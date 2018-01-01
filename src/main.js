@@ -12,7 +12,10 @@ function createPlayerEnvironment(playerEntity) {
 async function main(canvas){
   const context = canvas.getContext('2d');
 
-  const entityFactory = await loadEntities();
+  const [entityFactory, font] = await Promise.all([
+    loadEntities(),
+    loadFont()
+  ]);
   const loadLevel = await createLevelLoader(entityFactory);
   const level = await loadLevel('1-1');
 
@@ -42,6 +45,8 @@ async function main(canvas){
     camera.pos.x = Math.max(0, mario.pos.x - 100);
     
     level.comp.draw(context, camera);
+
+    font.draw('A', context, 0, 0);
   }
 
   timer.start(0);
