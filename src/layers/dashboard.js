@@ -1,5 +1,6 @@
 function createDashboardLayer(font){
+  console.log(font);
   return function drawDashboard(context){
-    font.draw('A', context, 0, 0);    
+    font.print('MARIO', context, 16, 8);
   }
 }
