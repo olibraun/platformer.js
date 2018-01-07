@@ -1,0 +1,322 @@
+{
+  "spritesheet": "overworld",
+  "layers": [
+    {
+      "tiles": [
+        {
+          "name": "sky",
+          "ranges": [
+            [
+              0, 1000,
+              0, 15
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "tiles": [
+        {
+          "pattern": "mountain-small",
+          "ranges": [
+            [16, 11],
+            [64, 11],
+            [112, 11],
+            [160, 11],
+            [208, 12]
+          ]
+        },
+        {
+          "pattern": "mountain-big",
+          "ranges": [
+            [0, 10],
+            [48, 10],
+            [96, 10],
+            [144, 10],
+            [192, 10]
+          ]
+        },
+        {
+          "pattern": "bush-1",
+          "ranges": [
+            [23, 12],
+            [71, 12],
+            [119, 12],
+            [167, 12],
+            [205, 12]
+          ]
+        },
+        {
+          "pattern": "bush-2",
+          "ranges": [
+            [41, 12],
+            [89, 12],
+            [137, 12]
+          ]
+        },
+        {
+          "pattern": "bush-3",
+          "ranges": [
+            [11, 12],
+            [59, 12],
+            [71, 12],
+            [107, 12]
+          ]
+        }
+      ]
+    }
+  ],
+  "patterns": {
+    "cloud-single": {
+      "tiles": [
+        {
+          "name": "cloud-1-1",
+          "ranges": [[0,0]]
+        },
+        {
+          "name": "cloud-1-2",
+          "ranges": [[1,0]]
+        },
+        {
+          "name": "cloud-1-3",
+          "ranges": [[2,0]]
+        },
+        {
+          "name": "cloud-2-1",
+          "ranges": [[0,1]]
+        },
+        {
+          "name": "cloud-2-2",
+          "ranges": [[1,1]]
+        },
+        {
+          "name": "cloud-2-3",
+          "ranges": [[2,1]]
+        }
+      ]
+    },
+    "pipe-vert-stem": {
+      "tiles": [
+        {
+          "name": "pipe-vert-left",
+          "type": "ground",
+          "ranges": [[0,0]]
+        },
+        {
+          "name": "pipe-vert-right",
+          "type": "ground",
+          "ranges": [[1,0]]
+        }
+      ]
+    },
+    "pipe-vert-cap": {
+      "tiles": [
+        {
+          "name": "pipe-insert-vert-left",
+          "type": "ground",
+          "ranges": [[0,0]]
+        },
+        {
+          "name": "pipe-insert-vert-right",
+          "type": "ground",
+          "ranges": [[1,0]]
+        }
+      ]
+    },
+    "pipe-2h": {
+      "tiles": [
+        {
+          "pattern": "pipe-vert-cap",
+          "ranges": [[0,0]]
+        },
+        {
+          "pattern": "pipe-vert-stem",
+          "ranges": [[0,1]]
+        }
+      ]
+    },
+    "pipe-3h": {
+      "tiles": [
+        {
+          "pattern": "pipe-2h",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "pipe-vert-stem",
+          "ranges": [[0, 2]]
+        }
+      ]
+    },
+    "pipe-4h": {
+      "tiles": [
+        {
+          "pattern": "pipe-3h",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "pipe-vert-stem",
+          "ranges": [[0, 3]]
+        }
+      ]
+    },
+    "mountain-small": {
+      "tiles": [
+        {
+          "name": "mountain-1-2",
+          "ranges": [[1, 0]]
+        },
+        {
+          "name": "mountain-1-1",
+          "ranges": [[0, 1]]
+        },
+        {
+          "name": "mountain-2-1",
+          "ranges": [[1, 1]]
+        },
+        {
+          "name": "mountain-1-3",
+          "ranges": [[2, 1]]
+        }
+      ]
+    },
+    "mountain-big": {
+      "tiles": [
+        {
+          "pattern": "mountain-small",
+          "ranges": [[1, 0]]
+        },
+        {
+          "name": "mountain-1-1",
+          "ranges": [[0, 2]]
+        },
+        {
+          "name": "mountain-2-1",
+          "ranges": [[1,2]]
+        },
+        {
+          "name": "mountain-2-2",
+          "ranges": [[2, 2]]
+        },
+        {
+          "name": "mountain-2-3",
+          "ranges": [[3, 2]]
+        },
+        {
+          "name": "mountain-1-3",
+          "ranges": [[4, 2]]
+        }
+      ]
+    },
+    "bush-1": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[2, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [[1, 0]]
+        }
+      ]
+    },
+    "bush-2": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[3, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [
+            [
+              1, 2,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "bush-3": {
+      "tiles": [
+        {
+          "name": "bush-left",
+          "ranges": [[0, 0]]
+        },
+        {
+          "name": "bush-right",
+          "ranges": [[4, 0]]
+        },
+        {
+          "name": "bush-middle",
+          "ranges": [
+            [
+              1, 3,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "chocolate-2w": {
+      "tiles": [
+        {
+          "name": "chocolate",
+          "type": "ground",
+          "ranges": [
+            [
+              0, 2,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "chocolate-3w": {
+      "tiles": [
+        {
+          "name": "chocolate",
+          "type": "ground",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "chocolate-2w",
+          "ranges": [[1, 0]]
+        }
+      ]
+    },
+    "chocolate-4w": {
+      "tiles": [
+        {
+          "name": "chocolate",
+          "type": "ground",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "chocolate-3w",
+          "ranges": [[1, 0]]
+        }
+      ]
+    },
+    "chocolate-5w": {
+      "tiles": [
+        {
+          "name": "chocolate",
+          "type": "ground",
+          "ranges": [[0, 0]]
+        },
+        {
+          "pattern": "chocolate-4w",
+          "ranges": [[1, 0]]
+        }
+      ]
+    }
+  }
+}
