@@ -1,4 +1,4 @@
-function createBackgroundLayer(level, tiles, sprties){
+function createBackgroundLayer(level, tiles, sprites){
   const resolver = new TileResolver(tiles);
 
   const buffer = document.createElement('canvas');
@@ -13,10 +13,10 @@ function createBackgroundLayer(level, tiles, sprties){
       const col = tiles.grid[x];
       if(col){
         col.forEach((tile,y) => {
-          if(sprties.animations.has(tile.name)){
-            sprties.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
+          if(sprites.animations.has(tile.name)){
+            sprites.drawAnim(tile.name, context, x - startIndex, y, level.totalTime);
           } else {
-            sprties.drawByIndex(tile.name, context, x - startIndex, y);
+            sprites.drawByIndex(tile.name, context, x - startIndex, y);
           }
         })
       }
