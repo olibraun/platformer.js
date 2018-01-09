@@ -17,6 +17,7 @@ async function main(canvas){
     loadFont()
   ]);
   const loadLevel = await createLevelLoader(entityFactory);
+  // const level = await loadLevel('workbench');
   const level = await loadLevel('1-1');
 
   const camera = new Camera();
