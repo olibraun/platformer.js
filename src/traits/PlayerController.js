@@ -5,6 +5,8 @@ class PlayerController extends Trait {
     this.player = null;
     this.score = 0;
     this.time = 300;
+
+    this.canvasHeight = document.getElementById('screen').height;
   }
 
   setPlayer(entity) {
@@ -22,6 +24,10 @@ class PlayerController extends Trait {
       level.entities.add(this.player);
     } else {
       this.time -= deltaTime * 2;
+
+      if(this.player.pos.y > this.canvasHeight + this.player.size.y) {
+        this.player.killable.kill();
+      }
     }
   }
 }
