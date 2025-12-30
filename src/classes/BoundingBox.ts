@@ -2,7 +2,7 @@ import { Vec2 } from "../misc/math";
 
 export class BoundingBox {
   pos: Vec2;
-  size:Vec2;
+  size: Vec2;
   offset: Vec2;
 
   constructor(pos: Vec2, size: Vec2, offset: Vec2) {
@@ -11,11 +11,13 @@ export class BoundingBox {
     this.offset = offset;
   }
 
-  overlaps(box) {
-    return this.bottom > box.top
-      && this.top < box.bottom
-      && this.left < box.right
-      && this.right > box.left;
+  overlaps(box: BoundingBox) {
+    return (
+      this.bottom > box.top &&
+      this.top < box.bottom &&
+      this.left < box.right &&
+      this.right > box.left
+    );
   }
 
   get bottom() {

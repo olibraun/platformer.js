@@ -1,12 +1,7 @@
 import { Vec2 } from "../misc/math.js";
+import { Sides } from "../misc/sides.js";
 import { BoundingBox } from "./BoundingBox.js";
-
-var Sides = {
-  TOP: Symbol("top"),
-  BOTTOM: Symbol("bottom"),
-  LEFT: Symbol("left"),
-  RIGHT: Symbol("right"),
-};
+import { Level } from "./Level.js";
 
 export class Trait {
   NAME: string;
@@ -25,11 +20,11 @@ export class Trait {
     this.tasks.push(task);
   }
 
-  obstruct() {}
+  obstruct(...args: any[]) {}
 
   collides(us: Entity, them: Entity) {}
 
-  update() {}
+  update(...args: any[]) {}
 }
 
 export class Entity {
@@ -40,7 +35,7 @@ export class Entity {
   bounds: BoundingBox;
   lifetime: number = 0;
   traits: Trait[] = [];
-  [key: string]: any;  // zum Hinzufügen von Traits
+  [key: string]: any; // zum Hinzufügen von Traits
 
   constructor() {
     this.bounds = new BoundingBox(this.pos, this.size, this.offset);
@@ -57,13 +52,13 @@ export class Entity {
     });
   }
 
-  obstruct(side, match) {
+  obstruct(side: Sides, match: Entity) {
     this.traits.forEach((trait) => {
       trait.obstruct(this, side, match);
     });
   }
 
-  draw() {}
+  draw(ctx: CanvasRenderingContext2D) {}
 
   finalize() {
     this.traits.forEach((trait) => {
@@ -71,7 +66,7 @@ export class Entity {
     });
   }
 
-  update(deltaTime, level) {
+  update(deltaTime: number, level: Level) {
     this.traits.forEach((trait) => {
       trait.update(this, deltaTime, level);
     });

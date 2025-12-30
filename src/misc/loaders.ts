@@ -16,7 +16,7 @@ function loadJSON(url: string): Promise<any> {
   return fetch(url).then((r) => r.json());
 }
 
-function loadSpriteSheet(name: string): Promise<any> {
+export function loadSpriteSheet(name: string): Promise<any> {
   return loadJSON(`sprites/${name}.json`)
     .then((spec: SpriteSheetDTO) =>
       Promise.all([spec, loadImage(spec.imageURL)])

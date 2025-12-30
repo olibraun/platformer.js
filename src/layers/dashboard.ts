@@ -1,4 +1,4 @@
-function createDashboardLayer(font, playerEnv){
+export function createDashboardLayer(font, playerEnv){
   const LINE1 = font.size;
   const LINE2 = font.size * 2;
   
