@@ -1,4 +1,4 @@
-function loadEntities() {
+export function loadEntities() {
   const entityFactories = {};
 
   function addAs(name) {

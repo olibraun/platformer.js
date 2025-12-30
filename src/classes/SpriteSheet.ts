@@ -1,5 +1,5 @@
-class SpriteSheet{
-  constructor(image,width,height){
+export class SpriteSheet{
+  constructor(image,width?,height?){
     this.image = image;
     this.width = width;
     this.height = height;

@@ -1,5 +1,11 @@
-class BoundingBox {
-  constructor(pos, size, offset) {
+import { Vec2 } from "../misc/math";
+
+export class BoundingBox {
+  pos: Vec2;
+  size:Vec2;
+  offset: Vec2;
+
+  constructor(pos: Vec2, size: Vec2, offset: Vec2) {
     this.pos = pos;
     this.size = size;
     this.offset = offset;

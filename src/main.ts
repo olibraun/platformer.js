@@ -1,5 +1,12 @@
 //Platformer Mario
 
+import { Camera } from "./classes/Camera.js";
+import { Entity } from "./classes/Entity.js";
+import { Timer } from "./classes/Timer.js";
+import { loadEntities } from "./entities.js";
+import { loadFont } from "./loaders/font.js";
+import { PlayerController } from "./traits/PlayerController.js";
+
 function createPlayerEnvironment(playerEntity) {
   const playerEnv = new Entity();
   const playerControl = new PlayerController();
@@ -9,16 +16,13 @@ function createPlayerEnvironment(playerEntity) {
   return playerEnv;
 }
 
-async function main(canvas){
-  const context = canvas.getContext('2d');
+async function main(canvas: HTMLCanvasElement) {
+  const context = canvas.getContext("2d");
 
-  const [entityFactory, font] = await Promise.all([
-    loadEntities(),
-    loadFont()
-  ]);
+  const [entityFactory, font] = await Promise.all([loadEntities(), loadFont()]);
   const loadLevel = await createLevelLoader(entityFactory);
   // const level = await loadLevel('workbench');
-  const level = await loadLevel('1-1');
+  const level = await loadLevel("1-1");
 
   const camera = new Camera();
   window.camera = camera;
@@ -40,18 +44,18 @@ async function main(canvas){
 
   level.comp.layers.push(createDashboardLayer(font, playerEnv));
 
-  const timer = new Timer(1/60);
+  const timer = new Timer(1 / 60);
 
   timer.update = function update(deltaTime) {
     level.update(deltaTime);
 
     camera.pos.x = Math.max(0, mario.pos.x - 100);
-    
+
     level.comp.draw(context, camera);
-  }
+  };
 
   timer.start(0);
 }
 
-const canvas = document.getElementById('screen');
+const canvas = document.getElementById("screen") as HTMLCanvasElement;
 main(canvas);

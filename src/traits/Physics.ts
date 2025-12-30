@@ -1,6 +1,8 @@
-class Physics extends Trait {
+import { Trait } from "../classes/Entity.js";
+
+export class Physics extends Trait {
   constructor() {
-    super('physics');
+    super("physics");
   }
 
   update(entity, deltaTime, level) {

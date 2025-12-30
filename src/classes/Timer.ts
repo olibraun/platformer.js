@@ -1,31 +1,34 @@
-class Timer{
-  constructor (deltaTime = 60){
+export class Timer {
+  updateProxy: (time: number) => void;
+  update: (time: number) => void = (time) => {};
+
+  constructor(deltaTime: number = 60) {
     let accumulatedTime = 0;
     let lastTime = 0;
 
-    this.updateProxy = (time) => {
+    this.updateProxy = (time: number) => {
       accumulatedTime += (time - lastTime) / 1000;
-      if(accumulatedTime > 1){
+      if (accumulatedTime > 1) {
         accumulatedTime = 1;
       }
-      
-      while(accumulatedTime > deltaTime){
+
+      while (accumulatedTime > deltaTime) {
         this.update(deltaTime);
 
         accumulatedTime -= deltaTime;
       }
-      
+
       this.enqueue();
 
       lastTime = time;
-    }
+    };
   }
 
-  enqueue(){
+  enqueue() {
     requestAnimationFrame(this.updateProxy);
   }
 
-  start(){
+  start() {
     this.enqueue();
   }
 }

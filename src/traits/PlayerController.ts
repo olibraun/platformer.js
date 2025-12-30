@@ -1,12 +1,15 @@
-class PlayerController extends Trait {
+import { Trait } from "../classes/Entity.js";
+import { Vec2 } from "../misc/math.js";
+
+export class PlayerController extends Trait {
   constructor() {
-    super('playerController');
+    super("playerController");
     this.checkpoint = new Vec2(0, 0);
     this.player = null;
     this.score = 0;
     this.time = 300;
 
-    this.canvasHeight = document.getElementById('screen').height;
+    this.canvasHeight = document.getElementById("screen").height;
   }
 
   setPlayer(entity) {
@@ -14,7 +17,7 @@ class PlayerController extends Trait {
 
     this.player.stomper.onStomp = () => {
       this.score += 100;
-    }
+    };
   }
 
   update(entity, deltaTime, level) {
@@ -25,7 +28,7 @@ class PlayerController extends Trait {
     } else {
       this.time -= deltaTime * 2;
 
-      if(this.player.pos.y > this.canvasHeight + this.player.size.y) {
+      if (this.player.pos.y > this.canvasHeight + this.player.size.y) {
         this.player.killable.kill();
       }
     }
