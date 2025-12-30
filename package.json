@@ -1,0 +1,20 @@
+{
+  "name": "astar",
+  "version": "1.0.0",
+  "description": "A_Star",
+  "main": "dist/sketch.js",
+  "scripts": {
+  "build": "tsc && cp index.html dist/",
+  "watch": "tsc --watch",
+  "serve": "python3 -m http.server 8080 --directory dist",
+  "dev": "pnpm build && pnpm serve",
+  "start": "pnpm dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {}
+}

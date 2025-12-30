@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch with Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/dist",
+      "sourceMapPathOverrides": {
+        "webpack:///./src/*": "${webspaceRoot}/../src/*"
+      },
+      "preLaunchTask": "build-and-serve"
+    }
+  ]
+}
