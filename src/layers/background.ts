@@ -1,9 +1,14 @@
 import { Camera } from "../classes/Camera.js";
 import { Level } from "../classes/Level.js";
+import { SpriteSheet } from "../classes/SpriteSheet.js";
 import { TileResolver } from "../classes/TileResolver.js";
 import { Matrix } from "../misc/math.js";
 
-export function createBackgroundLayer(level: Level, tiles: Matrix, sprites) {
+export function createBackgroundLayer(
+  level: Level,
+  tiles: Matrix,
+  sprites: SpriteSheet
+) {
   const resolver = new TileResolver(tiles);
 
   const buffer: HTMLCanvasElement = document.createElement("canvas");
@@ -12,7 +17,7 @@ export function createBackgroundLayer(level: Level, tiles: Matrix, sprites) {
 
   const context: CanvasRenderingContext2D = buffer.getContext("2d")!;
 
-  function redraw(startIndex, endIndex) {
+  function redraw(startIndex: number, endIndex: number) {
     context.clearRect(0, 0, buffer.width, buffer.height);
     for (let x = startIndex; x <= endIndex; ++x) {
       const col = tiles.grid[x];

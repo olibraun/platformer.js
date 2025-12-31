@@ -1,4 +1,5 @@
 import { Matrix } from "../misc/math.js";
+import { Tile, TileBounds } from "../misc/types.js";
 
 export class TileResolver {
   matrix: Matrix;
@@ -27,10 +28,8 @@ export class TileResolver {
   getByIndex(
     indexX: number,
     indexY: number
-  ):
-    | { tile: number; x1: number; x2: number; y1: number; y2: number }
-    | undefined {
-    const tile = this.matrix.get(indexX, indexY);
+  ): TileBounds | undefined {
+    const tile: Tile | undefined = this.matrix.get(indexX, indexY);
     if (tile) {
       const x1 = indexX * this.tileSize;
       const x2 = x1 + this.tileSize;
@@ -51,10 +50,7 @@ export class TileResolver {
   }
 
   searchByRange(x1: number, x2: number, y1: number, y2: number) {
-    const matches: (
-      | { tile: number; x1: number; x2: number; y1: number; y2: number }
-      | undefined
-    )[] = [];
+    const matches: (TileBounds | undefined)[] = [];
 
     this.toIndexRange(x1, x2).forEach((indexX) => {
       this.toIndexRange(y1, y2).forEach((indexY) => {

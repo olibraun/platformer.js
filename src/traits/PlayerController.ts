@@ -25,10 +25,10 @@ export class PlayerController extends Trait {
   }
 
   update(entity: Entity, deltaTime: number, level: Level) {
-    if (!level.entities.has(this.player)) {
+    if (!level.entities.has(this.player!)) {
       this.player!.killable.revive();
       this.player!.pos.set(this.checkpoint.x, this.checkpoint.y);
-      level.entities.add(this.player);
+      level.entities.add(this.player!);
     } else {
       this.time -= deltaTime * 2;
 

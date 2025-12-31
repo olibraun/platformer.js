@@ -12,7 +12,7 @@ export function loadImage(url: string): Promise<HTMLImageElement> {
   });
 }
 
-function loadJSON(url: string): Promise<any> {
+export function loadJSON(url: string): Promise<any> {
   return fetch(url).then((r) => r.json());
 }
 

@@ -1,10 +1,17 @@
+import { Entity } from "./classes/Entity.js";
+import { loadGoomba } from "./entities/Goomba.js";
+import { loadKoopa } from "./entities/Koopa.js";
 import { loadMario } from "./entities/Mario.js";
 
-export function loadEntities() {
-  const entityFactories = {};
+export type EntityFactories = {
+  [key: string]: Function; // zum Hinzufügen von Factories
+};
 
-  function addAs(name) {
-    return (factory) => (entityFactories[name] = factory);
+export function loadEntities() {
+  const entityFactories: EntityFactories = {};
+
+  function addAs(name: string) {
+    return (factory: Function) => (entityFactories[name] = factory);
   }
 
   return Promise.all([

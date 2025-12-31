@@ -1,7 +1,7 @@
 {
-  "name": "astar",
+  "name": "platformer",
   "version": "1.0.0",
-  "description": "A_Star",
+  "description": "Platformer.ts",
   "main": "dist/sketch.js",
   "scripts": {
   "build": "tsc && cp index.html dist/",

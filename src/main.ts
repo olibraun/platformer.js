@@ -4,10 +4,11 @@ import { Camera } from "./classes/Camera.js";
 import { Entity } from "./classes/Entity.js";
 import { Timer } from "./classes/Timer.js";
 import { loadEntities } from "./entities.js";
+import { createDashboardLayer } from "./layers/dashboard.js";
 import { loadFont } from "./loaders/font.js";
 import { PlayerController } from "./traits/PlayerController.js";
 
-function createPlayerEnvironment(playerEntity) {
+function createPlayerEnvironment(playerEntity: Entity) {
   const playerEnv = new Entity();
   const playerControl = new PlayerController();
   playerControl.checkpoint.set(64, 64);

@@ -32,9 +32,9 @@ class GoombaBehavior extends Trait {
 }
 
 function createGoombaFactory(sprite: SpriteSheet) {
-  const walkAnim = sprite.animations.get("walk");
+  const walkAnim = sprite.animations.get("walk")!;
 
-  function routeAnim(goomba) {
+  function routeAnim(goomba: Entity) {
     if (goomba.killable.dead) {
       return "flat";
     }
@@ -42,7 +42,7 @@ function createGoombaFactory(sprite: SpriteSheet) {
     return walkAnim(goomba.lifetime);
   }
 
-  function drawGoomba(context: CanvasRenderingContext2D) {
+  function drawGoomba(this: Entity, context: CanvasRenderingContext2D) {
     sprite.draw(routeAnim(this), context, 0, 0);
   }
 

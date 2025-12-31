@@ -1,4 +1,20 @@
-function* expandSpan(xStart: number, xLen: number, yStart: number, yLen: number) {
+import { Level } from "../classes/Level.js";
+import { loadJSON, loadSpriteSheet } from "../misc/loaders.js";
+import { Matrix } from "../misc/math.js";
+
+function* expandSpan(
+  xStart: number,
+  xLen: number,
+  yStart: number,
+  yLen: number
+): Generator<
+  {
+    x: number;
+    y: number;
+  },
+  void,
+  unknown
+> {
   const xEnd = xStart + xLen;
   const yEnd = yStart + yLen;
   for (let x = xStart; x < xEnd; x++) {
@@ -8,7 +24,16 @@ function* expandSpan(xStart: number, xLen: number, yStart: number, yLen: number)
   }
 }
 
-function expandRange(range: number[]) {
+function expandRange(range: number[]):
+  | Generator<
+      {
+        x: number;
+        y: number;
+      },
+      void,
+      unknown
+    >
+  | undefined {
   if (range.length === 4) {
     const [x1, x2, y1, y2] = range;
     return expandSpan(x1, x2, y1, y2);
@@ -21,14 +46,26 @@ function expandRange(range: number[]) {
   }
 }
 
-function* expandRanges(ranges: number[][]) {
+function* expandRanges(ranges: number[][]): Generator<
+  | Generator<
+      {
+        x: number;
+        y: number;
+      },
+      void,
+      unknown
+    >
+  | undefined,
+  void,
+  unknown
+> {
   for (const range of ranges) {
     // yield* expandRange(range);
     yield expandRange(range);
   }
 }
 
-function* expandTiles(tiles, patterns) {
+function* expandTiles(tiles, patterns): Generator<any, void, any> {
   function* walkTiles(tiles, offsetX, offsetY) {
     for (const tile of tiles) {
       for (const { x, y } of expandRanges(tile.ranges)) {
@@ -51,7 +88,7 @@ function* expandTiles(tiles, patterns) {
   yield* walkTiles(tiles, 0, 0);
 }
 
-function createCollisionGrid(tiles, patterns) {
+function createCollisionGrid(tiles, patterns): Matrix {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -61,7 +98,7 @@ function createCollisionGrid(tiles, patterns) {
   return grid;
 }
 
-function createBackgroundGrid(tiles, patterns) {
+function createBackgroundGrid(tiles, patterns): Matrix {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -90,7 +127,7 @@ function setupBackgrounds(levelSpec, level, tiles) {
   });
 }
 
-function setupEntities(levelSpec, level, entityFactory) {
+function setupEntities(levelSpec, level: Level, entityFactory) {
   levelSpec.entities.forEach(({ name, pos: [x, y] }) => {
     const createEntity = entityFactory[name];
     const entity = createEntity();
@@ -102,7 +139,7 @@ function setupEntities(levelSpec, level, entityFactory) {
   level.comp.layers.push(spriteLayer);
 }
 
-function createLevelLoader(entityFactory) {
+export function createLevelLoader(entityFactory) {
   return function loadLevel(name) {
     return loadJSON(`levels/${name}.json`)
       .then((levelSpec) =>

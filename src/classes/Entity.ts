@@ -1,5 +1,6 @@
 import { Vec2 } from "../misc/math.js";
 import { Sides } from "../misc/sides.js";
+import { TileBounds } from "../misc/types.js";
 import { BoundingBox } from "./BoundingBox.js";
 import { Level } from "./Level.js";
 
@@ -52,7 +53,7 @@ export class Entity {
     });
   }
 
-  obstruct(side: Sides, match: Entity) {
+  obstruct(side: Sides, match: TileBounds) {
     this.traits.forEach((trait) => {
       trait.obstruct(this, side, match);
     });
