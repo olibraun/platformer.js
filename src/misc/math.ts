@@ -1,5 +1,3 @@
-import { Tile } from "./types.js";
-
 export class Vec2 {
   x: number = 0;
   y: number = 0;
@@ -14,10 +12,10 @@ export class Vec2 {
   }
 }
 
-export class Matrix {
-  grid: Tile[][] = [];
+export class Matrix<TileType> {
+  grid: TileType[][] = [];
 
-  forEach(callback: (value: Tile, x: number, y: number) => void) {
+  forEach(callback: (value: TileType, x: number, y: number) => void) {
     this.grid.forEach((column, x) => {
       column.forEach((value, y) => {
         callback(value, x, y);
@@ -25,7 +23,7 @@ export class Matrix {
     });
   }
 
-  set(x: number, y: number, value: Tile) {
+  set(x: number, y: number, value: TileType) {
     if (!this.grid[x]) {
       this.grid[x] = [];
     }
@@ -33,7 +31,7 @@ export class Matrix {
     this.grid[x][y] = value;
   }
 
-  get(x: number, y: number): Tile | undefined {
+  get(x: number, y: number): TileType | undefined {
     const col = this.grid[x];
     if (col) {
       return col[y];

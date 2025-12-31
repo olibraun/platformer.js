@@ -1,7 +1,7 @@
 import { Camera } from "./Camera.js";
 
 export class Compositor {
-  layers: ((arg1: CanvasRenderingContext2D, arg2: Camera) => {})[];
+  layers: ((context: CanvasRenderingContext2D, camera: Camera) => void)[];
 
   constructor() {
     this.layers = [];

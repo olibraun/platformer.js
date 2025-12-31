@@ -1,6 +1,6 @@
 import { Entity, Trait } from "../classes/Entity.js";
 import { Sides } from "../misc/sides.js";
-import { TileBounds } from "../misc/types.js";
+import { CollisionTile, TileBounds } from "../misc/types.js";
 
 export class Solid extends Trait {
   obstructs: boolean = true;
@@ -9,7 +9,7 @@ export class Solid extends Trait {
     super("solid");
   }
 
-  obstruct(entity: Entity, side: Sides, match: TileBounds) {
+  obstruct(entity: Entity, side: Sides, match: TileBounds<CollisionTile>) {
     if (!this.obstructs) {
       return;
     }

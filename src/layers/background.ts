@@ -3,10 +3,11 @@ import { Level } from "../classes/Level.js";
 import { SpriteSheet } from "../classes/SpriteSheet.js";
 import { TileResolver } from "../classes/TileResolver.js";
 import { Matrix } from "../misc/math.js";
+import { BackgroundTile } from "../misc/types.js";
 
 export function createBackgroundLayer(
   level: Level,
-  tiles: Matrix,
+  tiles: Matrix<BackgroundTile>,
   sprites: SpriteSheet
 ) {
   const resolver = new TileResolver(tiles);

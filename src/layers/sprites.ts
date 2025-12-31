@@ -5,7 +5,7 @@ export function createSpriteLayer(
   entities: Set<Entity>,
   width = 64,
   height = 64
-) {
+): (context: CanvasRenderingContext2D, camera: Camera) => void {
   const spriteBuffer: HTMLCanvasElement = document.createElement("canvas");
   spriteBuffer.width = width;
   spriteBuffer.height = height;

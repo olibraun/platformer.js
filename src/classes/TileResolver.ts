@@ -1,11 +1,14 @@
 import { Matrix } from "../misc/math.js";
-import { Tile, TileBounds } from "../misc/types.js";
+import { BackgroundTile, CollisionTile, TileBounds } from "../misc/types.js";
 
-export class TileResolver {
-  matrix: Matrix;
+export class TileResolver<TileType> {
+  matrix: Matrix<TileType>;
   tileSize: number;
 
-  constructor(matrix: Matrix, tileSize: number = 16) {
+  constructor(
+    matrix: Matrix<TileType>,
+    tileSize: number = 16
+  ) {
     this.matrix = matrix;
     this.tileSize = tileSize;
   }
@@ -28,8 +31,11 @@ export class TileResolver {
   getByIndex(
     indexX: number,
     indexY: number
-  ): TileBounds | undefined {
-    const tile: Tile | undefined = this.matrix.get(indexX, indexY);
+  ): TileBounds<TileType> | undefined {
+    const tile: TileType | undefined = this.matrix.get(
+      indexX,
+      indexY
+    );
     if (tile) {
       const x1 = indexX * this.tileSize;
       const x2 = x1 + this.tileSize;
@@ -50,7 +56,8 @@ export class TileResolver {
   }
 
   searchByRange(x1: number, x2: number, y1: number, y2: number) {
-    const matches: (TileBounds | undefined)[] = [];
+    const matches: (TileBounds<TileType> | undefined)[] =
+      [];
 
     this.toIndexRange(x1, x2).forEach((indexX) => {
       this.toIndexRange(y1, y2).forEach((indexY) => {

@@ -1,13 +1,13 @@
 import { Matrix } from "../misc/math.js";
 import { Sides } from "../misc/sides.js";
-import { TileBounds } from "../misc/types.js";
+import { CollisionTile, TileBounds } from "../misc/types.js";
 import { Entity } from "./Entity.js";
 import { TileResolver } from "./TileResolver.js";
 
 export class TileCollider {
-  tiles: TileResolver;
+  tiles: TileResolver<CollisionTile>;
 
-  constructor(tileMatrix: Matrix) {
+  constructor(tileMatrix: Matrix<CollisionTile>) {
     this.tiles = new TileResolver(tileMatrix);
   }
 
@@ -21,12 +21,8 @@ export class TileCollider {
       return;
     }
 
-    const matches: (TileBounds | undefined)[] = this.tiles.searchByRange(
-      x,
-      x,
-      entity.bounds.top,
-      entity.bounds.bottom
-    );
+    const matches: (TileBounds<CollisionTile> | undefined)[] =
+      this.tiles.searchByRange(x, x, entity.bounds.top, entity.bounds.bottom);
 
     matches.forEach((match) => {
       if (match) {

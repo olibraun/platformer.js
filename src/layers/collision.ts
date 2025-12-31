@@ -55,7 +55,7 @@ function createTileCandidateLayer(tileCollider: TileCollider) {
   };
 }
 
-function createCollisionLayer(level: Level) {
+export function createCollisionLayer(level: Level) {
   const drawTileCandidates = createTileCandidateLayer(level.tileCollider!);
   const drawBoundingBoxes = createEntityLayer(level.entities);
 

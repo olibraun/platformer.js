@@ -1,6 +1,10 @@
 import { Level } from "../classes/Level.js";
+import { EntityFactories } from "../entities.js";
+import { createBackgroundLayer } from "../layers/background.js";
+import { createSpriteLayer } from "../layers/sprites.js";
 import { loadJSON, loadSpriteSheet } from "../misc/loaders.js";
 import { Matrix } from "../misc/math.js";
+import { BackgroundTile, CollisionTile } from "../misc/types.js";
 
 function* expandSpan(
   xStart: number,
@@ -89,7 +93,7 @@ function* expandTiles(tiles, patterns): Generator<any, void, any> {
 }
 
 function createCollisionGrid(tiles, patterns): Matrix {
-  const grid = new Matrix();
+  const grid = new Matrix<CollisionTile>();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
     grid.set(x, y, { type: tile.type });
@@ -98,8 +102,8 @@ function createCollisionGrid(tiles, patterns): Matrix {
   return grid;
 }
 
-function createBackgroundGrid(tiles, patterns): Matrix {
-  const grid = new Matrix();
+function createBackgroundGrid(tiles, patterns): Matrix<BackgroundTile> {
+  const grid = new Matrix<BackgroundTile>();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
     grid.set(x, y, { name: tile.name });
@@ -127,7 +131,7 @@ function setupBackgrounds(levelSpec, level, tiles) {
   });
 }
 
-function setupEntities(levelSpec, level: Level, entityFactory) {
+function setupEntities(levelSpec, level: Level, entityFactory: EntityFactories) {
   levelSpec.entities.forEach(({ name, pos: [x, y] }) => {
     const createEntity = entityFactory[name];
     const entity = createEntity();

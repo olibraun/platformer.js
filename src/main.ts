@@ -6,6 +6,7 @@ import { Timer } from "./classes/Timer.js";
 import { loadEntities } from "./entities.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 import { loadFont } from "./loaders/font.js";
+import { setupKeyboard } from "./misc/input.js";
 import { PlayerController } from "./traits/PlayerController.js";
 
 function createPlayerEnvironment(playerEntity: Entity) {
@@ -55,7 +56,8 @@ async function main(canvas: HTMLCanvasElement) {
     level.comp.draw(context, camera);
   };
 
-  timer.start(0);
+  //timer.start(0);
+  timer.start();
 }
 
 const canvas = document.getElementById("screen") as HTMLCanvasElement;

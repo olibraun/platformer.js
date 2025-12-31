@@ -1,7 +1,7 @@
 import { Entity } from "../classes/Entity.js";
 import { KeyboardState } from "../classes/KeyboardState.js";
 
-function setupKeyboard(mario: Entity) {
+export function setupKeyboard(mario: Entity) {
   const input = new KeyboardState();
   input.addMapping("KeyP", (keyState: 0 | 1) => {
     if (keyState) {

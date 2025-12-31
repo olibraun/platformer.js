@@ -1,4 +1,5 @@
 import { Matrix } from "../misc/math";
+import { CollisionTile } from "../misc/types";
 import { Compositor } from "./Compositor.js";
 import { Entity } from "./Entity.js";
 import { EntityCollider } from "./EntityCollider.js";
@@ -16,7 +17,7 @@ export class Level {
     this.entityCollider = new EntityCollider(this.entities);
   }
 
-  setCollisionGrid(matrix: Matrix) {
+  setCollisionGrid(matrix: Matrix<CollisionTile>) {
     this.tileCollider = new TileCollider(matrix);
   }
 
