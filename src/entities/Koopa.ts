@@ -1,6 +1,6 @@
 import { Entity, Trait } from "../classes/Entity.js";
 import { SpriteSheet } from "../classes/SpriteSheet.js";
-import { loadSpriteSheet } from "../misc/loaders";
+import { loadSpriteSheet } from "../misc/loaders.js";
 import { Killable } from "../traits/Killable.js";
 import { PendulumMove } from "../traits/PendulumMove.js";
 import { Physics } from "../traits/Physics.js";

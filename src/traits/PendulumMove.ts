@@ -1,5 +1,5 @@
-import { Entity, Trait } from "../classes/Entity";
-import { Sides } from "../misc/sides";
+import { Entity, Trait } from "../classes/Entity.js";
+import { Sides } from "../misc/sides.js";
 
 export class PendulumMove extends Trait {
   enabled: boolean = true;

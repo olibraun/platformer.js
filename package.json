@@ -4,7 +4,7 @@
   "description": "Platformer.ts",
   "main": "dist/sketch.js",
   "scripts": {
-  "build": "tsc && cp index.html dist/",
+  "build": "tsc && cp index.html dist/ && cp -r sprites/ dist/ && cp -r levels/ dist/ && cp -r img/ dist/",
   "watch": "tsc --watch",
   "serve": "python3 -m http.server 8080 --directory dist",
   "dev": "pnpm build && pnpm serve",
