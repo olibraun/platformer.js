@@ -20,7 +20,7 @@ function createPlayerEnvironment(playerEntity: Entity) {
 }
 
 async function main(canvas: HTMLCanvasElement) {
-  const context = canvas.getContext("2d");
+  const context: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
   const [entityFactory, font] = await Promise.all([loadEntities(), loadFont()]);
   const loadLevel = await createLevelLoader(entityFactory);

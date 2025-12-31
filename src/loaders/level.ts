@@ -1,7 +1,9 @@
 import { Level } from "../classes/Level.js";
+import { SpriteSheet } from "../classes/SpriteSheet.js";
 import { EntityFactories } from "../entities.js";
 import { createBackgroundLayer } from "../layers/background.js";
 import { createSpriteLayer } from "../layers/sprites.js";
+import { LevelSpecDTO, PatternDTO, TilesDTO } from "../misc/DTO.js";
 import { loadJSON, loadSpriteSheet } from "../misc/loaders.js";
 import { Matrix } from "../misc/math.js";
 import { BackgroundTile, CollisionTile } from "../misc/types.js";
@@ -51,26 +53,27 @@ function expandRange(range: number[]):
 }
 
 function* expandRanges(ranges: number[][]): Generator<
-  | Generator<
-      {
-        x: number;
-        y: number;
-      },
-      void,
-      unknown
-    >
-  | undefined,
+  {
+    x: number;
+    y: number;
+  },
   void,
   unknown
 > {
   for (const range of ranges) {
-    // yield* expandRange(range);
-    yield expandRange(range);
+    yield* expandRange(range)!;
   }
 }
 
-function* expandTiles(tiles, patterns): Generator<any, void, any> {
-  function* walkTiles(tiles, offsetX, offsetY) {
+function* expandTiles(
+  tiles: TilesDTO[],
+  patterns: PatternDTO
+): Generator<any, void, any> {
+  function* walkTiles(
+    tiles: TilesDTO[],
+    offsetX: number,
+    offsetY: number
+  ): Generator<{}> {
     for (const tile of tiles) {
       for (const { x, y } of expandRanges(tile.ranges)) {
         const derivedX = x + offsetX;
@@ -92,7 +95,10 @@ function* expandTiles(tiles, patterns): Generator<any, void, any> {
   yield* walkTiles(tiles, 0, 0);
 }
 
-function createCollisionGrid(tiles, patterns): Matrix {
+function createCollisionGrid(
+  tiles: TilesDTO[],
+  patterns: {}
+): Matrix<CollisionTile> {
   const grid = new Matrix<CollisionTile>();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -102,7 +108,10 @@ function createCollisionGrid(tiles, patterns): Matrix {
   return grid;
 }
 
-function createBackgroundGrid(tiles, patterns): Matrix<BackgroundTile> {
+function createBackgroundGrid(
+  tiles: TilesDTO[],
+  patterns: {}
+): Matrix<BackgroundTile> {
   const grid = new Matrix<BackgroundTile>();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -112,15 +121,22 @@ function createBackgroundGrid(tiles, patterns): Matrix<BackgroundTile> {
   return grid;
 }
 
-function setupCollision(levelSpec, level) {
-  const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
-    return mergedTiles.concat(layerSpec.tiles);
-  }, []);
+function setupCollision(levelSpec: LevelSpecDTO, level: Level) {
+  const mergedTiles: TilesDTO[] = levelSpec.layers.reduce(
+    (mergedTiles, layerSpec) => {
+      return mergedTiles.concat(layerSpec.tiles);
+    },
+    [] as TilesDTO[]
+  );
   const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
   level.setCollisionGrid(collisionGrid);
 }
 
-function setupBackgrounds(levelSpec, level, tiles) {
+function setupBackgrounds(
+  levelSpec: LevelSpecDTO,
+  level: Level,
+  tiles: SpriteSheet
+) {
   levelSpec.layers.forEach((layer) => {
     const backgroundGrid = createBackgroundGrid(
       layer.tiles,
@@ -132,7 +148,7 @@ function setupBackgrounds(levelSpec, level, tiles) {
 }
 
 function setupEntities(
-  levelSpec,
+  levelSpec: LevelSpecDTO,
   level: Level,
   entityFactory: EntityFactories
 ) {
