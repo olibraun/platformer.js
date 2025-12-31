@@ -6,6 +6,7 @@ import { Timer } from "./classes/Timer.js";
 import { loadEntities } from "./entities.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 import { loadFont } from "./loaders/font.js";
+import { createLevelLoader } from "./loaders/level.js";
 import { setupKeyboard } from "./misc/input.js";
 import { PlayerController } from "./traits/PlayerController.js";
 
@@ -27,7 +28,7 @@ async function main(canvas: HTMLCanvasElement) {
   const level = await loadLevel("1-1");
 
   const camera = new Camera();
-  window.camera = camera;
+  //window.camera = camera;
 
   const mario = entityFactory.mario();
 

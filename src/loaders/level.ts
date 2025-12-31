@@ -131,7 +131,11 @@ function setupBackgrounds(levelSpec, level, tiles) {
   });
 }
 
-function setupEntities(levelSpec, level: Level, entityFactory: EntityFactories) {
+function setupEntities(
+  levelSpec,
+  level: Level,
+  entityFactory: EntityFactories
+) {
   levelSpec.entities.forEach(({ name, pos: [x, y] }) => {
     const createEntity = entityFactory[name];
     const entity = createEntity();
@@ -143,8 +147,8 @@ function setupEntities(levelSpec, level: Level, entityFactory: EntityFactories) 
   level.comp.layers.push(spriteLayer);
 }
 
-export function createLevelLoader(entityFactory) {
-  return function loadLevel(name) {
+export function createLevelLoader(entityFactory: EntityFactories) {
+  return function loadLevel(name: string) {
     return loadJSON(`levels/${name}.json`)
       .then((levelSpec) =>
         Promise.all([levelSpec, loadSpriteSheet(levelSpec.spritesheet)])
